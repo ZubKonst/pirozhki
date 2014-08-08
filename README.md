@@ -1,0 +1,48 @@
+Pirozhki
+========
+
+Pirozhki is a [sidekiq](http://sidekiq.org)-based utility for collecting data from social networks. 
+
+![Pirozhki with instagram and twitter](info/pirozhki_with_instagram_and_twitter.jpg)
+
+
+Available types of Pirozhki:
+--
+- Pirozhki with instagram and geotags. (GeoPoint table.)
+
+Useful examples:
+--
+- Connecting with ELK (Elasticsearch, Logstash and Kibana) stack.
+![Images over time](info/images_over_time.png)
+![Images on the map](info/images_on_the_map.png)  
+![Hashtags and Places](info/hashtags_and_places_by_popularity.png)  
+
+Run Pirozhki on the server:
+--
+- Fill with your data configs from `APP/config/variables/...` and put configs into server `{deploy_dir}/shared/variables`  
+- Fill with your data `deploy_sample.yml`, rename to `deploy.yml` and use capistrano. `/config/variables/deploy.yml` is gitignored.
+- Capistrano tips:
+```
+cap deploy:start (restart|stop)
+cap sidekiq_web:start (restart|stop)
+cap sidekiq_workers:start (restart|stop)
+```
+
+Run Pirozhki locally:
+--
+- Fill with your data configs from `APP/config/variables/...`
+- Enjoy [foreman](https://github.com/ddollar/foreman).
+
+Init database on the server from project path:
+--
+```
+[RUBY_ENV=production] ruby db/create.rb
+[RUBY_ENV=production] ruby db/migrate.rb
+[RUBY_ENV=production] ruby db/seed.rb
+```
+
+Run console:
+--
+```
+[RUBY_ENV=production] bundle exec irb -r ./app.rb
+```

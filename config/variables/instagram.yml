@@ -1,0 +1,9 @@
+development:
+  :proxy:
+  :client_id: REPLACE_ME
+  :client_secret: REPLACE_ME
+
+production:
+  :proxy:
+  :client_id: REPLACE_ME
+  :client_secret: REPLACE_ME

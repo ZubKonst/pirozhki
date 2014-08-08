@@ -1,0 +1,9 @@
+development:
+  :type: :stdout
+
+production:
+  REPLACE_ME
+  :type: :tcp
+  :host: localhost
+  :port: 5229
+

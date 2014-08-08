@@ -1,0 +1,3 @@
+production:
+  :app_path: /var/www/pirozhki/current
+

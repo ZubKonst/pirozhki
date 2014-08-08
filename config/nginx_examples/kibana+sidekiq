@@ -1,0 +1,59 @@
+upstream sidekiq_web_server {
+    server unix:/var/www/pirozhki/shared/pids/sidekiq_web.sock fail_timeout=0;
+}
+
+server {
+  listen 0.0.0.0:80;
+
+  server_name  kibana.localhost kibana;
+  access_log   /var/log/nginx/kibana.localhost.access.log;
+
+  location / {
+    root  /opt/kibana/current;
+    index  index.html  index.htm;
+  }
+
+  location /sidekiq {
+    proxy_pass http://sidekiq_web_server;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_buffering off;
+  }
+
+  location ~ ^/_aliases$ {
+    proxy_pass http://127.0.0.1:9200;
+    proxy_read_timeout 90;
+  }
+  location ~ ^/.*/_aliases$ {
+    proxy_pass http://127.0.0.1:9200;
+    proxy_read_timeout 90;
+  }
+  location ~ ^/_nodes$ {
+    proxy_pass http://127.0.0.1:9200;
+    proxy_read_timeout 90;
+  }
+  location ~ ^/.*/_search$ {
+    proxy_pass http://127.0.0.1:9200;
+    proxy_read_timeout 90;
+  }
+  location ~ ^/.*/_mapping$ {
+    proxy_pass http://127.0.0.1:9200;
+    proxy_read_timeout 90;
+  }
+  location ~ ^/_cluster/health$ {
+    proxy_pass http://127.0.0.1:9200;
+    proxy_read_timeout 90;
+  }
+
+  # password protected end points
+  location ~ ^/kibana-int/dashboard/.*$ {
+    proxy_pass http://127.0.0.1:9200;
+    proxy_read_timeout 90;
+  }
+
+  location ~ ^/kibana-int/temp.*$ {
+    proxy_pass http://127.0.0.1:9200;
+    proxy_read_timeout 90;
+  }
+}

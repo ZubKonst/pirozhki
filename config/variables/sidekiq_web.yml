@@ -1,0 +1,8 @@
+development:
+  :username: admin
+  :password:
+
+production:
+  :username: admin
+  :password: REPLACE_ME
+  :app_path: /var/www/pirozhki/current

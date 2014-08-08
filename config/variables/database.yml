@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  pool: 5
+  encoding: unicode
+  database: pirozhki_development
+  username: dbuser
+  password:
+
+production:
+  adapter: postgresql
+  pool: 5
+  encoding: unicode
+  database: pirozhki_production
+  username: pirozhki
+  password: REPLACE_ME
