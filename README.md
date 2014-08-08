@@ -13,9 +13,10 @@ Available types of Pirozhki:
 Useful examples:
 --
 - Connecting with ELK (Elasticsearch, Logstash and Kibana) stack.
-![Images over time](info/images_over_time.png)
-![Images on the map](info/images_on_the_map.png)  
-![Hashtags and Places](info/hashtags_and_places_by_popularity.png)  
+  - Posts over time ![Images over time](info/images_over_time.png)
+  - Posts on the map ![Images on the map](info/images_on_the_map.png)  
+  - Hashtags by popularity ![Hashtags and Places](info/hashtags_by_popularity.png)  
+
 
 Run Pirozhki on the server:
 --
