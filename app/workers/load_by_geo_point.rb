@@ -21,7 +21,7 @@ class LoadByGeoPoint
     end
 
     benchmark.get_posts do
-      @posts = posts_in_point(@geo_point)
+      @posts = load_posts(@geo_point)
     end
 
     benchmark.enqueue_posts_data do
@@ -36,7 +36,7 @@ class LoadByGeoPoint
     GeoPoint.find(geo_point_id)
   end
 
-  def posts_in_point(geo_point)
+  def load_posts(geo_point)
     params = {max_time: self.class.request_max_time.call }
     InstagramClient.new.media_search(geo_point.lat, geo_point.lng, params)
   end

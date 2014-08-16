@@ -9,6 +9,13 @@ class PostBuilder < BaseBuilder
     posts_data.select { |t| !exists_instagram_ids.include?(t['id']) }
   end
 
+  def self.find_or_create_with_counter!(post_data)
+    post = PostBuilder.new(post_data).find_or_create!
+    PostCounterBuilder.new(post_record: post, raw_post_data: post_data).find_or_create!
+    post
+  end
+
+
   private
 
   def model

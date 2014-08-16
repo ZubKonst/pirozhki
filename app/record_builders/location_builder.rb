@@ -8,12 +8,8 @@ class LocationBuilder < BaseBuilder
     Location
   end
 
-  def uniq_attrs
-    if @data['id']
-      attrs.select { |key| [ :instagram_id ].include?(key) }
-    else
-      attrs.select { |key| [ :lat, :lng ].include?(key) }
-    end
+  def uniq_keys
+    attrs[:instagram_id] ? [:instagram_id] : [:lat, :lng]
   end
 
   def attrs
@@ -21,7 +17,7 @@ class LocationBuilder < BaseBuilder
       instagram_id: @data['id'],
       lat: @data['latitude'],
       lng: @data['longitude'],
-      name:      @data['name']
+      name: @data['name']
     }
   end
 end

@@ -2,6 +2,10 @@ development:
   :username: admin
   :password:
 
+test:
+  :username: admin
+  :password:
+
 production:
   :username: admin
   :password: REPLACE_ME

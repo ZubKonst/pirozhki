@@ -1,14 +1,14 @@
+require_relative 'concerns/exportable'
+
 class GeoPoint < ActiveRecord::Base
   has_many :posts
 
+  include Exportable # add :export_attrs method
+  add_export prefix: 'geo_point',
+             export_fields:  %i[ id ],
+             export_methods: %i[ long_lat ]
+
   def long_lat
     [ lng, lat ]
-  end
-
-  def export_attrs
-    export_fields = %i[ id ]
-    attrs = self.as_json(only: export_fields)
-    attrs['long_lat'] = long_lat
-    Hash[ attrs.map { |k,v| ["geo_point_#{k}", v] } ]
   end
 end

@@ -1,3 +1,5 @@
+require_relative 'concerns/exportable'
+
 class Post < ActiveRecord::Base
   belongs_to :geo_point
   belongs_to :user
@@ -20,6 +22,7 @@ class Post < ActiveRecord::Base
 
   def export_data
     data_sources = [self, user, geo_point, location, filter]
+
     data_sources.inject({}) do |data, data_source|
       data_attrs = data_source.export_attrs
       data.merge!( data_attrs )
@@ -27,19 +30,22 @@ class Post < ActiveRecord::Base
     end
   end
 
-  def export_attrs
-    export_fields = %i[ id instagram_id created_time content_type caption ]
-    attrs = self.as_json(only: export_fields)
+  include Exportable # add :export_attrs method
+  add_export prefix: 'post',
+             export_fields:  %i[ id instagram_id created_time content_type caption ],
+             extra_fields: :extra_export
 
+  def extra_export
+    attrs = {}
     attrs['tags'] = self.tags.pluck(:name)
     attrs['tags_count'] = attrs['tags'].count
     attrs['tagged_users_count'] = self.tagged_users.count
 
     post_counter = last_post_counter
-    attrs['likes_count'] = post_counter.likes_count
+    attrs['likes_count']    = post_counter.likes_count
     attrs['comments_count'] = post_counter.comments_count
 
-    Hash[ attrs.map { |k,v| ["post_#{k}", v] } ]
+    attrs
   end
 
 end

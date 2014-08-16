@@ -2,7 +2,7 @@ require_relative 'base_builder'
 
 class PostCounterBuilder < BaseBuilder
 
-  def initialize(post_record, raw_post_data)
+  def initialize(post_record:, raw_post_data:)
     @post_record   = post_record
     @raw_post_data = raw_post_data
   end
