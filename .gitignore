@@ -2,6 +2,7 @@
 
 # Pirozhki Project
 /config/variables/deploy.yml
+/config/variables/instagram.yml
 
 ### Ruby template
 *.gem

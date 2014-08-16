@@ -2,6 +2,14 @@ development:
   adapter: postgresql
   pool: 5
   encoding: unicode
+  database: pirozhki_test
+  username: dbuser
+  password:
+
+test:
+  adapter: postgresql
+  pool: 5
+  encoding: unicode
   database: pirozhki_development
   username: dbuser
   password:

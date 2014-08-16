@@ -1,0 +1,9 @@
+
+Pirozhki 0.1.1, 2014-08-16
+--------------------------
+- Added changelog file.
+- Added specs.
+
+Pirozhki 0.1.0, 2014-08-07
+--------------------------
+- Initial release.

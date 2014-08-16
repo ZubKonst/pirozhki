@@ -8,8 +8,9 @@ class RequestManager
   recurrence { hourly.minute_of_hour( *(0..59).step(1).to_a ) }
 
   def perform
-    all_geo_points.each do |geo_point|
-      init_load( geo_point.id )
+    geo_points = all_geo_points
+    geo_points.each do |gp|
+      init_load( gp.id )
     end
   end
 

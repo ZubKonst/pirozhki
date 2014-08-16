@@ -13,6 +13,7 @@ class BaseBuilder
   private
 
   def uniq_attrs
-    attrs.select { |key| uniq_keys.include?(key) }
+    valid_keys = uniq_keys
+    attrs.select { |key| valid_keys.include?(key) }
   end
 end

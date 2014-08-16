@@ -1,7 +1,7 @@
 class InstagramClient
 
   def initialize(token=nil)
-    @client = init_client(token)
+    @token = token
     @timeout = 60
   end
 
@@ -11,7 +11,7 @@ class InstagramClient
     max_time = args[:max_time]
 
     timeout do
-      @client.media_search(
+      client.media_search(
         lat, lng,
         distance: dist, count: 100,
         min_timestamp: min_time, max_timestamp: max_time
@@ -21,12 +21,11 @@ class InstagramClient
 
   private
 
-  def init_client(token)
-    if token
-      Instagram.client(access_token: session[:access_token])
-    else
-      Instagram.client
-    end
+  def client(rebuild=false)
+    return @client if @client && !rebuild
+
+    config = @token ? {access_token: @token} : {}
+    @client = Instagram.client(config)
   end
 
   def timeout
