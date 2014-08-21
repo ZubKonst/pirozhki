@@ -1,5 +1,6 @@
 Pirozhki
 ========
+[![Code Climate](https://codeclimate.com/github/ZubKonst/pirozhki/badges/gpa.svg)](https://codeclimate.com/github/ZubKonst/pirozhki)
 
 Pirozhki is a [sidekiq](http://sidekiq.org)-based utility for collecting data from social networks. 
 

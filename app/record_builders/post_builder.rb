@@ -27,29 +27,46 @@ class PostBuilder < BaseBuilder
   end
 
   def attrs
-    {
-      instagram_id: @data['id'],
-      geo_point_id: @data['meta']['geo_point_id'],
+    base_attrs =
+      {
+        instagram_id: @data['id'],
+        geo_point_id: @data['meta']['geo_point_id'],
+      }
 
+    base_attrs.merge! records_attrs
+    base_attrs.merge! content_attrs
+    base_attrs.merge! time_attrs
+    base_attrs
+  end
+
+  # Attributes that are dependent on other recordings.
+  def records_attrs
+    {
       user_id: user.id,
       filter_id:   filter.id,
       location_id: location.id,
 
       tag_ids: tags.map(&:id),
-      tagged_user_ids: users_in_photo.map(&:id),
+      tagged_user_ids: users_in_photo.map(&:id)
+    }
+  end
 
-      created_time: @data['created_time'].to_i,
-      updated_time: Time.now.to_i,
-
+  def content_attrs
+    {
       content_type: @data['type'],
-      caption: caption,
-
+      caption: @data['caption'].try(:[], :text),
       instagram_link: @data['link'],
       image_link: image_link,
       video_link: video_link
     }
   end
 
+  def time_attrs
+    {
+      created_time: @data['created_time'].to_i,
+      updated_time: Time.now.to_i
+    }
+  end
 
   def user
     UserBuilder.new(@data['user']).find_or_create!
@@ -73,10 +90,6 @@ class PostBuilder < BaseBuilder
     @data['users_in_photo'].map do |user_in_photo|
       UserBuilder.new(user_in_photo['user']).find_or_create!
     end
-  end
-
-  def caption
-    @data['caption'].try(:[], :text)
   end
 
   def image_link
