@@ -1,3 +1,9 @@
 language: ruby
 rvm:
   - "2.1.1"
+services:
+  - redis-server
+before_script:
+  - cp config/variables/database.yml.travis config/variables/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - RUBY_ENV=test ruby db/migrate.rb

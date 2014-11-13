@@ -93,6 +93,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rake (10.3.2)
     redis (3.1.0)
     rvm-capistrano (1.5.3)
       capistrano (~> 2.15.4)
@@ -159,6 +160,7 @@ DEPENDENCIES
   pg
   pr_geohash
   puma
+  rake (~> 10.3.2)
   redis
   redis-namespace!
   rvm-capistrano

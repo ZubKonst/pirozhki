@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'rake', '~> 10.3.2'
+
 # rails parts
 gem 'activerecord',  '4.1.4', require: 'active_record'
 gem 'activesupport', '4.1.4',
@@ -47,7 +49,7 @@ end
 group :test do
   gem 'minitest'
   gem 'database_cleaner'
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
 end
 
 group :help do
