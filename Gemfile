@@ -47,7 +47,9 @@ end
 group :test do
   gem 'minitest'
   gem 'database_cleaner'
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
+  gem 'coveralls', require: false
+  gem 'rake'
 end
 
 group :help do

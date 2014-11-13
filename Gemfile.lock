@@ -37,6 +37,12 @@ GEM
       timers (~> 1.1.0)
     chartkick (1.3.2)
     connection_pool (2.0.0)
+    coveralls (0.7.1)
+      multi_json (~> 1.3)
+      rest-client
+      simplecov (>= 0.7)
+      term-ansicolor
+      thor
     database_cleaner (1.3.0)
     docile (1.1.5)
     dotenv (0.11.1)
@@ -72,6 +78,7 @@ GEM
       atomic (~> 1.0)
       avl_tree (~> 1.1.2)
       hitimes (~> 1.1)
+    mime-types (2.4.3)
     minitest (5.4.0)
     mock_redis (0.13.2)
     multi_json (1.10.1)
@@ -83,6 +90,7 @@ GEM
     net-ssh (2.9.1)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    netrc (0.8.0)
     oj (2.9.9)
     pg (0.17.1)
     pr_geohash (1.0.0)
@@ -93,7 +101,11 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rake (10.3.2)
     redis (3.1.0)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rvm-capistrano (1.5.3)
       capistrano (~> 2.15.4)
     sidekiq (3.2.1)
@@ -132,10 +144,13 @@ GEM
     stud (0.0.17)
       ffi
       metriks
+    term-ansicolor (1.3.0)
+      tins (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
     timers (1.1.0)
+    tins (1.3.3)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
 
@@ -148,6 +163,7 @@ DEPENDENCIES
   awesome_print
   capistrano (~> 2.15.5)
   capistrano_colors
+  coveralls
   database_cleaner
   foreman
   god
@@ -159,6 +175,7 @@ DEPENDENCIES
   pg
   pr_geohash
   puma
+  rake
   redis
   redis-namespace!
   rvm-capistrano
