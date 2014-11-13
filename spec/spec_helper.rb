@@ -1,7 +1,13 @@
 ENV['RUBY_ENV'] ||= 'test'
 
-## SimpleCov ##
+## TestCoverage ##
 require 'simplecov'
+require 'coveralls'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
 SimpleCov.start do
   add_group 'Models', 'app/models'
   add_group 'RecordBuilders', 'app/record_builders'
@@ -9,6 +15,7 @@ SimpleCov.start do
   add_group 'Workers', 'app/workers'
 end
 ###################
+
 
 
 ## Requires ##
