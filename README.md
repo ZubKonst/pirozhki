@@ -1,5 +1,8 @@
 Pirozhki
 ========
+[![Build Status](https://travis-ci.org/ZubKonst/pirozhki.svg?branch=master)](https://travis-ci.org/ZubKonst/pirozhki)
+[![Code Climate](https://codeclimate.com/github/ZubKonst/pirozhki/badges/gpa.svg)](https://codeclimate.com/github/ZubKonst/pirozhki)
+[![Coverage Status](https://coveralls.io/repos/ZubKonst/pirozhki/badge.png?branch=master)](https://coveralls.io/r/ZubKonst/pirozhki)
 
 Pirozhki is a [sidekiq](http://sidekiq.org)-based utility for collecting data from social networks. 
 
