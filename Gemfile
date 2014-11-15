@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # rails parts
-gem 'activerecord',  '4.1.4', require: 'active_record'
-gem 'activesupport', '4.1.4',
+gem 'activerecord',  '4.1.7', require: 'active_record'
+gem 'activesupport', '4.1.7',
     require: %w[ active_support/core_ext/numeric/time active_support/concern ]
 
 # databases
