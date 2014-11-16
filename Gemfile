@@ -50,6 +50,8 @@ group :test do
   gem 'database_cleaner'
   gem 'simplecov', require: false
   gem 'coveralls', require: false
+  gem 'mutant', require: false
+  gem 'mutant-rspec', require: false
 end
 
 group :help do
