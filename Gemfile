@@ -45,11 +45,11 @@ group :development do
 end
 
 group :test do
-  gem 'minitest'
+  gem 'rake'
+  gem 'rspec'
   gem 'database_cleaner'
   gem 'simplecov', require: false
   gem 'coveralls', require: false
-  gem 'rake'
 end
 
 group :help do

@@ -28,7 +28,7 @@ describe Post do
            filter_id filter_name ]
 
       export_data = post.export_data
-      export_data.keys.must_match_array required_fields
+      expect(export_data.keys).to match_array(required_fields)
     end
   end
 end

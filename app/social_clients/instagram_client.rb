@@ -21,12 +21,12 @@ class InstagramClient
 
   private
 
-  def client(rebuild=false)
-    return @client if @client && !rebuild
-
-    config = @token ? {access_token: @token} : {}
-    @client = Instagram.client(config)
-  end
+  # def client(rebuild=false)
+  #   return @client if @client && !rebuild
+  #
+  #   config = @token ? {access_token: @token} : {}
+  #   @client = Instagram.client(config)
+  # end
 
   def timeout
     Timeout.timeout(@timeout) { yield }

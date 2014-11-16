@@ -1,9 +1,7 @@
-require_relative 'base_builder_helper'
+require_relative 'record_builder_behavior'
 require_relative '../spec_helper'
 
 describe PostBuilder do
-  include BaseBuilderHelper
-
   subject { PostBuilder }
   let(:records) { Post }
   let(:data) do
@@ -11,11 +9,13 @@ describe PostBuilder do
     response.sample_with_meta
   end
 
+  include_examples 'record builder'
+
   describe 'self.find_or_create_with_counter!' do
     it 'create post and counter' do
       post = subject.find_or_create_with_counter!(data)
-      records.count.must_equal 1
-      post.post_counters.count.must_equal 1
+      expect(records.count).to eq(1)
+      expect(post.post_counters.count).to eq(1)
     end
 
     it 'add counter to existed post' do
@@ -25,16 +25,16 @@ describe PostBuilder do
       data['meta']['request_at'] = Time.now.to_i
       post = subject.find_or_create_with_counter!(data)
 
-      records.count.must_equal 1
-      post.post_counters.count.must_equal 2
+      expect(records.count).to eq(1)
+      expect(post.post_counters.count).to eq(2)
     end
 
     it 'not create counter twice' do
-      post = subject.find_or_create_with_counter!(data)
+      _post = subject.find_or_create_with_counter!(data)
       post = subject.find_or_create_with_counter!(data)
 
-      records.count.must_equal 1
-      post.post_counters.count.must_equal 1
+      expect(records.count).to eq(1)
+      expect(post.post_counters.count).to eq(1)
     end
   end
 
@@ -54,7 +54,7 @@ describe PostBuilder do
     it 'select not created posts_data' do
       created_posts, not_created_posts = randomly_split(full_posts_data)
       created_posts.each { |post_data| PostBuilder.new(post_data).find_or_create! }
-      PostBuilder.not_existed(full_posts_data).must_equal not_created_posts
+      expect(PostBuilder.not_existed(full_posts_data)).to eq(not_created_posts)
     end
   end
 
