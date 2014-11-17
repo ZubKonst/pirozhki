@@ -1,4 +1,5 @@
 require_relative 'base_builder'
+require 'set'
 
 class PostBuilder < BaseBuilder
 
@@ -6,7 +7,7 @@ class PostBuilder < BaseBuilder
     def not_existed(posts_data)
       instagram_ids = posts_data.map { |t| t['id'] }
       exists_instagram_ids = Post.where(instagram_id: instagram_ids).pluck(:instagram_id)
-      exists_instagram_ids = Set.new( exists_instagram_ids )
+      exists_instagram_ids = exists_instagram_ids.to_set
       posts_data.select { |t| !exists_instagram_ids.include?(t['id']) }
     end
 
