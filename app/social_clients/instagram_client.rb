@@ -1,8 +1,8 @@
 class InstagramClient
 
-  def initialize(token=nil)
+  def initialize(token: nil, timeout: nil)
     @token = token
-    @timeout = 60
+    @timeout = timeout || 60
   end
 
   def media_search(lat, lng, args={})
@@ -21,12 +21,12 @@ class InstagramClient
 
   private
 
-  # def client(rebuild=false)
-  #   return @client if @client && !rebuild
-  #
-  #   config = @token ? {access_token: @token} : {}
-  #   @client = Instagram.client(config)
-  # end
+  def client(rebuild=false)
+    return @client if @client && !rebuild
+
+    config = @token ? {access_token: @token} : {}
+    @client = Instagram.client(config)
+  end
 
   def timeout
     Timeout.timeout(@timeout) { yield }
