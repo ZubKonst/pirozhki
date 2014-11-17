@@ -1,18 +1,20 @@
 ENV['RUBY_ENV'] ||= 'test'
 
 ## TestCoverage ##
-require 'simplecov'
-require 'coveralls'
+if ENV['COVERAGE'] == 'true'
+  require 'simplecov'
+  require 'coveralls'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-SimpleCov.start do
-  add_group 'Models', 'app/models'
-  add_group 'RecordBuilders', 'app/record_builders'
-  add_group 'SocialClients', 'app/social_clients'
-  add_group 'Workers', 'app/workers'
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    SimpleCov::Formatter::HTMLFormatter,
+    Coveralls::SimpleCov::Formatter
+  ]
+  SimpleCov.start do
+    add_group 'Models', 'app/models'
+    add_group 'RecordBuilders', 'app/record_builders'
+    add_group 'SocialClients', 'app/social_clients'
+    add_group 'Workers', 'app/workers'
+  end
 end
 ###################
 
