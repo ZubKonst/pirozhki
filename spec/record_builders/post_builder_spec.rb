@@ -11,7 +11,7 @@ describe PostBuilder do
 
   include_examples 'record builder'
 
-  describe 'self.find_or_create_with_counter!' do
+  context 'self.find_or_create_with_counter!' do
     it 'create post and counter' do
       post = subject.find_or_create_with_counter!(data)
       expect(records.count).to eq(1)
@@ -38,7 +38,7 @@ describe PostBuilder do
     end
   end
 
-  describe 'self.not_existed' do
+  context 'self.not_existed' do
 
     let(:full_posts_data) do
       response = FakeInstagramResponse.instance

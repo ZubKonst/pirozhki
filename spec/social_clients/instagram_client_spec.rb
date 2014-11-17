@@ -8,7 +8,7 @@ describe InstagramClient do
     allow(subject).to receive(:client) { @instagram_gem }
   end
 
-  describe '#media_search' do
+  context '#media_search' do
     context 'call client with arguments' do
       it 'with default values' do
         send_values     = [55.55, 33.33]

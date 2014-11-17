@@ -1,7 +1,7 @@
 
 shared_examples 'record builder' do
 
-  describe '#find_or_create!' do
+  context '#find_or_create!' do
     it 'create record' do
       subject.new(data).find_or_create!
       expect(records.count).to eq(1)

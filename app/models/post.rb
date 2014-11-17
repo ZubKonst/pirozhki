@@ -17,29 +17,27 @@ class Post < ActiveRecord::Base
   enum content_type: { image: 0, video: 1 }
 
   def last_post_counter
-    self.post_counters.order(:created_time).last
+    post_counters.order(:created_time).last
   end
 
   def export_data
     data_sources = [self, user, geo_point, location, filter]
-
-    data_sources.inject({}) do |data, data_source|
+    data_sources.each_with_object({}) do |data_source, export_hash|
       data_attrs = data_source.export_attrs
-      data.merge!( data_attrs )
-      data
+      export_hash.merge!( data_attrs )
     end
   end
 
   include Exportable # add :export_attrs method
   add_export prefix: 'post',
-             export_fields:  %i[ id instagram_id created_time content_type caption ],
+             export_fields: %i[ id instagram_id created_time content_type caption ],
              extra_fields: :extra_export
 
   def extra_export
     attrs = {}
-    attrs['tags'] = self.tags.pluck(:name)
+    attrs['tags'] = tags.pluck(:name)
     attrs['tags_count'] = attrs['tags'].count
-    attrs['tagged_users_count'] = self.tagged_users.count
+    attrs['tagged_users_count'] = tagged_users.count
 
     post_counter = last_post_counter
     attrs['likes_count']    = post_counter.likes_count
