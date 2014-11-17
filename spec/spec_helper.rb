@@ -1,7 +1,7 @@
 ENV['RUBY_ENV'] ||= 'test'
 
 ## TestCoverage ##
-if ENV['COVERAGE'] == 'true'
+if ENV['COVERAGE'] || ENV['TRAVIS']
   require 'simplecov'
   require 'coveralls'
 
