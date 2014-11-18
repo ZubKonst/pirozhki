@@ -17,7 +17,7 @@ class BaseBuilder
   def uniq_attrs
     valid_keys = uniq_keys.to_set
     out = attrs.select { |key| valid_keys.include?(key) }
-    raise ArgumentError.new("Uniq attrs on #{model.name} should not be empty.") if out.empty?
+    raise ArgumentError, "Uniq attrs on #{model.name} should not be empty." if out.empty?
     out
   end
 end
