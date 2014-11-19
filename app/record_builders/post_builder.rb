@@ -1,5 +1,6 @@
-require_relative 'base_builder'
 require 'set'
+
+require_relative 'base_builder'
 
 class PostBuilder < BaseBuilder
 

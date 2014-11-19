@@ -1,3 +1,5 @@
+require 'yaml'
+
 @ruby_env = ENV['RUBY_ENV'] || 'production'
 
 god_configs = YAML.load_file(File.join(File.dirname(__FILE__), './variables/god.yml'))

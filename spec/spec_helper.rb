@@ -1,4 +1,4 @@
-ENV['RUBY_ENV'] ||= 'test'
+ENV['RUBY_ENV'] = 'test'
 
 ## TestCoverage ##
 if ENV['COVERAGE'] || ENV['TRAVIS']

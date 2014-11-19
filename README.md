@@ -11,14 +11,6 @@ Available types of Pirozhki:
 --
 - Pirozhki with instagram and geotags. (GeoPoint table.)
 
-Useful examples:
---
-- Connecting with ELK (Elasticsearch, Logstash and Kibana) stack.
-  - Posts over time ![Images over time](info/images_over_time.png)
-  - Posts on the map ![Images on the map](info/images_on_the_map.png)  
-  - Hashtags by popularity ![Hashtags and Places](info/hashtags_by_popularity.png)  
-
-
 Run Pirozhki on the server:
 --
 - Fill with your data configs from `APP/config/variables/...` and put configs into server `{deploy_dir}/shared/variables`  
@@ -38,13 +30,21 @@ Run Pirozhki locally:
 Init database on the server from project path:
 --
 ```
-[RUBY_ENV=production] ruby db/create.rb
-[RUBY_ENV=production] ruby db/migrate.rb
-[RUBY_ENV=production] ruby db/seed.rb
+[RUBY_ENV=production] rake db:create
+[RUBY_ENV=production] rake db:migrate
+[RUBY_ENV=production] rake db:seed
 ```
 
 Run console:
 --
 ```
-[RUBY_ENV=production] bundle exec irb -r ./app.rb
+[RUBY_ENV=production] irb -r ./app.rb
 ```
+
+
+Useful examples:
+--
+- Connecting with ELK (Elasticsearch, Logstash and Kibana) stack.
+  - Posts over time ![Images over time](info/images_over_time.png)
+  - Posts on the map ![Images on the map](info/images_on_the_map.png)
+  - Hashtags by popularity ![Hashtags and Places](info/hashtags_by_popularity.png)

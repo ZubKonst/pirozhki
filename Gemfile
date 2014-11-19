@@ -6,6 +6,7 @@ gem 'activesupport', '4.1.7',
     require: %w[ active_support/core_ext/numeric/time active_support/concern ]
 
 # databases
+gem 'active_record_migrations', require: false
 gem 'pg'
 gem 'hiredis'
 gem 'redis', require:  %w[ redis redis/connection/hiredis ]

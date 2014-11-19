@@ -1,3 +1,5 @@
+require 'yaml'
+
 database_configs = YAML.load_file(File.join(File.dirname(__FILE__), '../variables/database.yml'))
 database_config = database_configs[RUBY_ENV]
 

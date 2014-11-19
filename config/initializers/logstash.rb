@@ -1,3 +1,5 @@
+require 'yaml'
+
 logstash_configs = YAML.load_file(File.join(File.dirname(__FILE__), '../variables/logstash.yml'))
 logstash_config = logstash_configs[RUBY_ENV]
 
