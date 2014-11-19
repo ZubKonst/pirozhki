@@ -1,57 +1,42 @@
-ENV['RUBY_ENV'] ||= 'test'
+ENV['RUBY_ENV'] = 'test'
 
 ## TestCoverage ##
-require 'simplecov'
-require 'coveralls'
+if ENV['COVERAGE'] || ENV['TRAVIS']
+  require 'simplecov'
+  require 'coveralls'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-SimpleCov.start do
-  add_group 'Models', 'app/models'
-  add_group 'RecordBuilders', 'app/record_builders'
-  add_group 'SocialClients', 'app/social_clients'
-  add_group 'Workers', 'app/workers'
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    SimpleCov::Formatter::HTMLFormatter,
+    Coveralls::SimpleCov::Formatter
+  ]
+  SimpleCov.start do
+    add_group 'Models', 'app/models'
+    add_group 'RecordBuilders', 'app/record_builders'
+    add_group 'SocialClients', 'app/social_clients'
+    add_group 'Workers', 'app/workers'
+  end
 end
 ###################
-
 
 
 ## Requires ##
 require_relative '../app'
-require 'minitest/pride'
-require 'minitest/autorun'
-require 'minitest/benchmark'
 require_relative 'helpers/fake_instagram_response'
-require_relative 'helpers/match_array'
 ###################
 
 
-## AwesomePrint ##
-module Minitest::Assertions
-  ##
-  # This returns a human-readable version of +obj+. By default
-  # #inspect is called. You can override this to use #pretty_print
-  # if you want.
+RSpec.configure do |config|
 
-  def mu_pp obj
-    obj.awesome_inspect
+  ## DatabaseCleaner ##
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :transaction
   end
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+  ###################
+
 end
-###################
-
-
-## DatabaseCleaner ##
-DatabaseCleaner.clean_with :truncation
-DatabaseCleaner.strategy = :transaction
-class MiniTest::Spec
-  before do
-    DatabaseCleaner.start
-  end
-
-  after do
-    DatabaseCleaner.clean
-  end
-end
-###################

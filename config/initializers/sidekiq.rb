@@ -1,3 +1,5 @@
+require 'yaml'
+
 module Sidekiq
   def self.load_json(string)
     Oj.load(string)

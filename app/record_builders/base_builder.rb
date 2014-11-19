@@ -1,3 +1,5 @@
+require 'set'
+
 class BaseBuilder
 
   def initialize(post_data)
@@ -13,7 +15,9 @@ class BaseBuilder
   private
 
   def uniq_attrs
-    valid_keys = uniq_keys
-    attrs.select { |key| valid_keys.include?(key) }
+    valid_keys = uniq_keys.to_set
+    out = attrs.select { |key| valid_keys.include?(key) }
+    raise ArgumentError, "Uniq attrs on #{model.name} should not be empty." if out.empty?
+    out
   end
 end

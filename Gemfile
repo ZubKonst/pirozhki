@@ -1,15 +1,16 @@
 source 'https://rubygems.org'
 
 # rails parts
-gem 'activerecord',  '4.1.4', require: 'active_record'
-gem 'activesupport', '4.1.4',
+gem 'activerecord',  '4.1.8', require: 'active_record'
+gem 'activesupport', '4.1.8',
     require: %w[ active_support/core_ext/numeric/time active_support/concern ]
 
 # databases
+gem 'active_record_migrations', require: false
 gem 'pg'
 gem 'hiredis'
 gem 'redis', require:  %w[ redis redis/connection/hiredis ]
-gem 'redis-namespace', git: 'https://github.com/resque/redis-namespace.git'
+gem 'redis-namespace'
 
 # export
 gem 'logstash-logger'
@@ -17,6 +18,7 @@ gem 'logstash-logger'
 # support
 gem 'awesome_print'
 gem 'oj'
+gem 'rake'
 
 # social networks
 gem 'instagram'
@@ -45,11 +47,12 @@ group :development do
 end
 
 group :test do
-  gem 'minitest'
+  gem 'rspec'
   gem 'database_cleaner'
   gem 'simplecov', require: false
   gem 'coveralls', require: false
-  gem 'rake'
+  gem 'mutant', require: false
+  gem 'mutant-rspec', require: false
 end
 
 group :help do

@@ -1,20 +1,23 @@
+require 'set'
+
 require_relative 'base_builder'
 
 class PostBuilder < BaseBuilder
 
-  def self.not_existed(posts_data)
-    instagram_ids = posts_data.map { |t| t['id'] }
-    exists_instagram_ids = Post.where(instagram_id: instagram_ids).pluck(:instagram_id)
-    exists_instagram_ids = Set.new( exists_instagram_ids )
-    posts_data.select { |t| !exists_instagram_ids.include?(t['id']) }
-  end
+  class << self
+    def not_existed(posts_data)
+      instagram_ids = posts_data.map { |t| t['id'] }
+      exists_instagram_ids = Post.where(instagram_id: instagram_ids).pluck(:instagram_id)
+      exists_instagram_ids = exists_instagram_ids.to_set
+      posts_data.select { |t| !exists_instagram_ids.include?(t['id']) }
+    end
 
-  def self.find_or_create_with_counter!(post_data)
-    post = PostBuilder.new(post_data).find_or_create!
-    PostCounterBuilder.new(post_record: post, raw_post_data: post_data).find_or_create!
-    post
+    def find_or_create_with_counter!(post_data)
+      post = PostBuilder.new(post_data).find_or_create!
+      PostCounterBuilder.new(post_record: post, raw_post_data: post_data).find_or_create!
+      post
+    end
   end
-
 
   private
 
@@ -43,7 +46,7 @@ class PostBuilder < BaseBuilder
   def records_attrs
     {
       user_id: user.id,
-      filter_id:   filter.id,
+      filter_id: filter.id,
       location_id: location.id,
 
       tag_ids: tags.map(&:id),

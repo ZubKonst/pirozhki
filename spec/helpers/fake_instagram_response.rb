@@ -1,3 +1,5 @@
+require 'yaml'
+
 class FakeInstagramResponse
   include Singleton
   extend Forwardable
