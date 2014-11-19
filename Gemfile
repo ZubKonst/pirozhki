@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
 # rails parts
-gem 'activerecord',  '4.1.7', require: 'active_record'
-gem 'activesupport', '4.1.7',
+gem 'activerecord',  '4.1.8', require: 'active_record'
+gem 'activesupport', '4.1.8',
     require: %w[ active_support/core_ext/numeric/time active_support/concern ]
 
 # databases
+gem 'active_record_migrations', require: false
 gem 'pg'
 gem 'hiredis'
 gem 'redis', require:  %w[ redis redis/connection/hiredis ]
@@ -17,6 +18,7 @@ gem 'logstash-logger'
 # support
 gem 'awesome_print'
 gem 'oj'
+gem 'rake'
 
 # social networks
 gem 'instagram'
@@ -45,7 +47,6 @@ group :development do
 end
 
 group :test do
-  gem 'rake'
   gem 'rspec'
   gem 'database_cleaner'
   gem 'simplecov', require: false

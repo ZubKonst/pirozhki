@@ -1,3 +1,5 @@
+require 'yaml'
+
 instagram_configs = YAML.load_file(File.join(File.dirname(__FILE__), '../variables/instagram.yml'))
 instagram_config = instagram_configs[RUBY_ENV]
 

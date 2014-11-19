@@ -1,3 +1,5 @@
+require 'yaml'
+
 ENV['STAGE'] ||= 'production'
 stage = ENV['STAGE']
 
@@ -63,12 +65,12 @@ end
 
 
 namespace :god do
-  desc "Stop god"
+  desc 'Stop god'
   task :stop do
     terminate_if_runing
   end
 
-  desc "Start god"
+  desc 'Start god'
   task :start do
     god_start
   end
