@@ -10,7 +10,7 @@ gem 'active_record_migrations', require: false
 gem 'pg'
 gem 'hiredis'
 gem 'redis', require:  %w[ redis redis/connection/hiredis ]
-gem 'redis-namespace', git: 'https://github.com/resque/redis-namespace.git'
+gem 'redis-namespace'
 
 # export
 gem 'logstash-logger'
