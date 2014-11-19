@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # rails parts
-gem 'activerecord',  '4.1.7', require: 'active_record'
-gem 'activesupport', '4.1.7',
+gem 'activerecord',  '4.1.8', require: 'active_record'
+gem 'activesupport', '4.1.8',
     require: %w[ active_support/core_ext/numeric/time active_support/concern ]
 
 # databases
@@ -18,6 +18,7 @@ gem 'logstash-logger'
 # support
 gem 'awesome_print'
 gem 'oj'
+gem 'rake'
 
 # social networks
 gem 'instagram'
@@ -46,7 +47,6 @@ group :development do
 end
 
 group :test do
-  gem 'rake'
   gem 'rspec'
   gem 'database_cleaner'
   gem 'simplecov', require: false
