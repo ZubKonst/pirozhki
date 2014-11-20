@@ -43,7 +43,7 @@ cap sidekiq_workers:start (restart|stop)
   - Hashtags by popularity ![Hashtags and Places](info/hashtags_by_popularity.png)
 
 ##License:
-Pirozhki is a utility for collecting data from social networks.
+Pirozhki is a utility for collecting data from social networks.  
 Copyright (C) 2014  Konstantin Zub (hello at zubkonst.com)
 
 This program is free software: you can redistribute it and/or modify
