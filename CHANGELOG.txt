@@ -1,8 +1,18 @@
+Pirozhki 0.2.1, 2014-11-18
+--------------------------
+- Add gemnasium.
+- Change test framework (minitest to rspec).
+- Add mutation testing + improve specs.
+- Move db tasks to rake.
+
+Pirozhki 0.1.2, 2014-11-13
+--------------------------
+- Add codeclimate, travis-ci, coveralls.
 
 Pirozhki 0.1.1, 2014-08-16
 --------------------------
-- Added changelog file.
-- Added specs.
+- Add changelog file.
+- Add specs.
 
 Pirozhki 0.1.0, 2014-08-07
 --------------------------
