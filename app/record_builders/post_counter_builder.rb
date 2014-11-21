@@ -1,6 +1,7 @@
 require_relative 'base_builder'
 
 class PostCounterBuilder < BaseBuilder
+  MODEL = PostCounter
 
   def initialize(post_record:, raw_post_data:)
     @post_record   = post_record
@@ -17,10 +18,6 @@ class PostCounterBuilder < BaseBuilder
   end
 
   private
-
-  def model
-    PostCounter
-  end
 
   def uniq_keys
     [ :post_id, :created_time ]

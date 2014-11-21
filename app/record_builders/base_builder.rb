@@ -14,6 +14,10 @@ class BaseBuilder
 
   private
 
+  def model
+     self.class::MODEL
+  end
+
   def uniq_attrs
     valid_keys = uniq_keys.to_set
     out = attrs.select { |key| valid_keys.include?(key) }

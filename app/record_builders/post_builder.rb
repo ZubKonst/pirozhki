@@ -3,6 +3,7 @@ require 'set'
 require_relative 'base_builder'
 
 class PostBuilder < BaseBuilder
+  MODEL = Post
 
   class << self
     def not_existed(posts_data)
@@ -33,10 +34,6 @@ class PostBuilder < BaseBuilder
   end
 
   private
-
-  def model
-    Post
-  end
 
   def uniq_attrs
     { instagram_id: @data['id'] }
