@@ -1,0 +1,14 @@
+development:
+  :namespace: pirozhki_development
+  :driver: :hiredis
+  :url: redis://localhost:6379/0
+
+test:
+  :namespace: pirozhki_test
+  :driver: :hiredis
+  :url: redis://localhost:6379/0
+
+production:
+  :namespace: pirozhki_production
+  :driver: :hiredis
+  :url: REPLACE_ME

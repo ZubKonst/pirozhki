@@ -1,4 +1,5 @@
 - Add license.
+- Add redis config.
 
 Pirozhki 0.2.1, 2014-11-18
 --------------------------
