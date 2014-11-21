@@ -4,34 +4,38 @@ require_relative '../spec_helper'
 describe PostBuilder do
   subject { PostBuilder }
   let(:records) { Post }
-  let(:data) do
+  let(:sample_data) do
     response = FakeInstagramResponse.instance
     response.sample_with_meta
+  end
+  let(:collection_data) do
+    response = FakeInstagramResponse.instance
+    response.all_with_meta
   end
 
   include_examples 'record builder'
 
   context 'self.find_or_create_with_counter!' do
     it 'create post and counter' do
-      post = subject.find_or_create_with_counter!(data)
+      post = subject.find_or_create_with_counter!(sample_data)
       expect(records.count).to eq(1)
       expect(post.post_counters.count).to eq(1)
     end
 
     it 'add counter to existed post' do
-      post = subject.find_or_create_with_counter!(data)
+      post = subject.find_or_create_with_counter!(sample_data)
 
       # new couners
-      data['meta']['request_at'] = Time.now.to_i
-      post = subject.find_or_create_with_counter!(data)
+      sample_data['meta']['request_at'] = Time.now.to_i
+      post = subject.find_or_create_with_counter!(sample_data)
 
       expect(records.count).to eq(1)
       expect(post.post_counters.count).to eq(2)
     end
 
     it 'not create counter twice' do
-      _post = subject.find_or_create_with_counter!(data)
-      post = subject.find_or_create_with_counter!(data)
+      _post = subject.find_or_create_with_counter!(sample_data)
+      post = subject.find_or_create_with_counter!(sample_data)
 
       expect(records.count).to eq(1)
       expect(post.post_counters.count).to eq(1)

@@ -7,6 +7,15 @@ class PostCounterBuilder < BaseBuilder
     @raw_post_data = raw_post_data
   end
 
+  def attrs
+    {
+      post_id:        @post_record.id,
+      likes_count:    @raw_post_data['likes']['count'],
+      comments_count: @raw_post_data['comments']['count'],
+      created_time:   @raw_post_data['meta']['request_at']
+    }
+  end
+
   private
 
   def model
@@ -15,14 +24,5 @@ class PostCounterBuilder < BaseBuilder
 
   def uniq_keys
     [ :post_id, :created_time ]
-  end
-
-  def attrs
-    {
-      post_id:        @post_record.id,
-      likes_count:    @raw_post_data['likes']['count'],
-      comments_count: @raw_post_data['comments']['count'],
-      created_time:   @raw_post_data['meta']['request_at']
-    }
   end
 end

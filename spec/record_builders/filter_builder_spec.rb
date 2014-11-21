@@ -5,9 +5,13 @@ describe FilterBuilder do
   it_behaves_like 'record builder' do
     subject { FilterBuilder }
     let(:records) { Filter }
-    let(:data) do
+    let(:sample_data) do
       response = FakeInstagramResponse.instance
       response.sample['filter']
+    end
+    let(:collection_data) do
+      response = FakeInstagramResponse.instance
+      response.all.map { |t| t['filter'] }
     end
   end
 end

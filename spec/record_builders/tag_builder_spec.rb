@@ -5,9 +5,13 @@ describe TagBuilder do
   it_behaves_like 'record builder' do
     subject { TagBuilder }
     let(:records) { Tag }
-    let(:data) do
+    let(:sample_data) do
       response = FakeInstagramResponse.instance
-      response.with_tags['tags'].sample
+      response.sample_with_tags['tags'].sample
+    end
+    let(:collection_data) do
+      response = FakeInstagramResponse.instance
+      response.all_with_tags.flat_map { |t| t['tags'] } .uniq
     end
   end
 end

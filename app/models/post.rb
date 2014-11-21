@@ -16,6 +16,9 @@ class Post < ActiveRecord::Base
 
   enum content_type: { image: 0, video: 1 }
 
+  before_validation(on: :create) { |t| t.created_time ||= Time.now.to_i }
+  before_validation { |t| t.updated_time = Time.now.to_i }
+
   def last_post_counter
     post_counters.order(:created_time).last
   end
