@@ -1,16 +1,7 @@
 require_relative 'base_builder'
 
 class UserBuilder < BaseBuilder
-
-  private
-
-  def model
-    User
-  end
-
-  def uniq_keys
-    [ :instagram_id ]
-  end
+  MODEL = User
 
   def attrs
     {
@@ -19,5 +10,11 @@ class UserBuilder < BaseBuilder
       full_name:    @data['full_name'],
       image:        @data['profile_picture']
     }
+  end
+
+  private
+
+  def uniq_keys
+    [ :instagram_id ]
   end
 end

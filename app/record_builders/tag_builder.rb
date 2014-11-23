@@ -1,18 +1,15 @@
 require_relative 'base_builder'
 
 class TagBuilder < BaseBuilder
-
-  private
-
-  def model
-    Tag
-  end
-
-  def uniq_keys
-    [ :name ]
-  end
+  MODEL = Tag
 
   def attrs
     { name: @data }
+  end
+
+  private
+
+  def uniq_keys
+    [ :name ]
   end
 end

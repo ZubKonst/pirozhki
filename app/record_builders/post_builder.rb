@@ -3,6 +3,7 @@ require 'set'
 require_relative 'base_builder'
 
 class PostBuilder < BaseBuilder
+  MODEL = Post
 
   class << self
     def not_existed(posts_data)
@@ -19,16 +20,6 @@ class PostBuilder < BaseBuilder
     end
   end
 
-  private
-
-  def model
-    Post
-  end
-
-  def uniq_attrs
-    { instagram_id: @data['id'] }
-  end
-
   def attrs
     base_attrs =
       {
@@ -40,6 +31,12 @@ class PostBuilder < BaseBuilder
     base_attrs.merge! content_attrs
     base_attrs.merge! time_attrs
     base_attrs
+  end
+
+  private
+
+  def uniq_attrs
+    { instagram_id: @data['id'] }
   end
 
   # Attributes that are dependent on other recordings.
@@ -66,8 +63,7 @@ class PostBuilder < BaseBuilder
 
   def time_attrs
     {
-      created_time: @data['created_time'].to_i,
-      updated_time: Time.now.to_i
+      created_time: @data['created_time'].to_i
     }
   end
 

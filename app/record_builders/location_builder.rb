@@ -1,16 +1,7 @@
 require_relative 'base_builder'
 
 class LocationBuilder < BaseBuilder
-
-  private
-
-  def model
-    Location
-  end
-
-  def uniq_keys
-    attrs[:instagram_id] ? [:instagram_id] : [:lat, :lng]
-  end
+  MODEL = Location
 
   def attrs
     {
@@ -19,5 +10,11 @@ class LocationBuilder < BaseBuilder
       lng: @data['longitude'],
       name: @data['name']
     }
+  end
+
+  private
+
+  def uniq_keys
+    attrs[:instagram_id] ? [:instagram_id] : [:lat, :lng]
   end
 end

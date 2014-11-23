@@ -1,18 +1,15 @@
 require_relative 'base_builder'
 
 class FilterBuilder < BaseBuilder
-
-  private
-
-  def model
-    Filter
-  end
-
-  def uniq_keys
-    [ :name ]
-  end
+  MODEL = Filter
 
   def attrs
     { name: @data }
+  end
+
+  private
+
+  def uniq_keys
+    [ :name ]
   end
 end
