@@ -1,3 +1,5 @@
+Pirozhki 0.2.2, 2014-11-22
+--------------------------
 - Add license.
 - Add redis config.
 - Improve tests.
