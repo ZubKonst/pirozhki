@@ -1,0 +1,11 @@
+db:
+  image: postgres
+  ports:
+    - "5432"
+web:
+  build: .
+  command: bundle exec foreman start
+  ports:
+    - "3000:3000"
+  links:
+    - db
