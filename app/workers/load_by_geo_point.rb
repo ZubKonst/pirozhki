@@ -1,6 +1,5 @@
 class LoadByGeoPoint
   include Sidekiq::Worker
-  include Sidekiq::Benchmark::Worker
 
   # The job will be unique for the number of seconds configured (default 30 minutes) or until the job has been completed.
   sidekiq_options queue: :api_request,
@@ -16,19 +15,10 @@ class LoadByGeoPoint
   def perform(geo_point_id)
     @request_at = Time.now.to_i # To make jobs idempotent
 
-    benchmark.find_geo_point do
-      @geo_point  = find_geo_point(geo_point_id)
-    end
+    @geo_point = find_geo_point(geo_point_id)
 
-    benchmark.get_posts do
-      @posts = load_posts(@geo_point)
-    end
-
-    benchmark.enqueue_posts_data do
-      enqueue_posts_data(@posts)
-    end
-
-    benchmark.finish
+    @posts = load_posts(@geo_point)
+    enqueue_posts_data(@posts)
   end
 
 

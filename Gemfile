@@ -28,7 +28,6 @@ gem 'puma'
 
 # workflow
 gem 'sidekiq'
-gem 'sidekiq-benchmark'
 gem 'sidekiq-throttler'
 gem 'sidekiq-unique-jobs'
 gem 'sidetiq'

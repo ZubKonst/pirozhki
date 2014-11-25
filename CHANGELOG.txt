@@ -1,3 +1,5 @@
+- Remove sidekiq-benchmark.
+
 Pirozhki 0.2.2, 2014-11-22
 --------------------------
 - Add license.
