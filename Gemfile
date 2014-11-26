@@ -28,6 +28,7 @@ gem 'puma'
 # workflow
 gem 'settingslogic'
 gem 'sidekiq'
+gem 'sinatra'
 gem 'sidekiq-throttler'
 gem 'sidekiq-unique-jobs'
 gem 'sidetiq'
