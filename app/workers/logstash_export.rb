@@ -7,8 +7,8 @@ class LogstashExport
 
 
   def perform(post_id)
-    @post = load_post(post_id)
-    export_post(@post)
+    post = load_post(post_id)
+    export_post(post)
   end
 
   def load_post(post_id)

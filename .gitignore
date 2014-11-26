@@ -1,8 +1,8 @@
 # Created by .gitignore support plugin (hsz.mobi)
 
 # Pirozhki Project
-/config/variables/deploy.yml
-/config/variables/instagram.yml
+config/variables/deploy.yml
+config/variables/instagram.yml
 
 ### Ruby template
 *.gem

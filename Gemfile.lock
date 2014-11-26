@@ -171,6 +171,7 @@ GEM
     rspec-support (3.1.2)
     rvm-capistrano (1.5.5)
       capistrano (~> 2.15.4)
+    settingslogic (2.0.9)
     sidekiq (3.3.0)
       celluloid (>= 0.16.0)
       connection_pool (>= 2.0.0)
@@ -238,6 +239,7 @@ DEPENDENCIES
   redis-namespace
   rspec
   rvm-capistrano
+  settingslogic
   sidekiq
   sidekiq-throttler
   sidekiq-unique-jobs

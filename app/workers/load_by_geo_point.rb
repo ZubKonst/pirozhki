@@ -6,19 +6,11 @@ class LoadByGeoPoint
                   unique: true,
                   throttle: { threshold: 4_900, period: 1.hour.to_i, key: 'api_request' }
 
-
-  # In realtime we can not collect correct data about likes and comments.
-  # 5 days delay will help.
-  class << self; attr_reader :request_max_time end
-  @request_max_time = -> { 5.days.ago.to_i }
-
   def perform(geo_point_id)
-    @request_at = Time.now.to_i # To make jobs idempotent
-
-    @geo_point = find_geo_point(geo_point_id)
-
-    @posts = load_posts(@geo_point)
-    enqueue_posts_data(@posts)
+    request_at = Time.now.to_i # To make jobs idempotent
+    geo_point = find_geo_point(geo_point_id)
+    posts = load_posts(geo_point)
+    enqueue_posts_data(posts, geo_point, request_at)
   end
 
 
@@ -26,23 +18,38 @@ class LoadByGeoPoint
     GeoPoint.find(geo_point_id)
   end
 
+
   def load_posts(geo_point)
-    params = {max_time: self.class.request_max_time.call }
-    InstagramClient.new.media_search(geo_point.lat, geo_point.lng, params)
+    InstagramClient.new.media_search(geo_point.lat, geo_point.lng, request_params)
   end
 
-  def enqueue_posts_data(posts)
+  def request_params
+    params = {}
+    params[:max_time] = request_max_time if request_max_time
+    params
+  end
+
+  # In realtime we can not collect correct data about likes and comments.
+  # 5 days delay will help.
+  def request_max_time
+    delay = ::Settings.instagram.request_delay
+    delay == 0 ? nil : (Time.now.to_i - delay)
+  end
+
+
+
+  def enqueue_posts_data(posts, geo_point, request_at)
     not_existed_posts = PostBuilder.not_existed(posts)
     not_existed_posts.each do |post_data|
-      add_meta_data!(post_data)
+      add_meta_data!(post_data, geo_point, request_at)
       build_post(post_data)
     end
   end
 
-  def add_meta_data!(post_data)
+  def add_meta_data!(post_data, geo_point, request_at)
     post_data['meta'] ||= {}
-    post_data['meta']['geo_point_id'] = @geo_point.id
-    post_data['meta']['request_at']   = @request_at # To make jobs idempotent
+    post_data['meta']['geo_point_id'] = geo_point.id
+    post_data['meta']['request_at']   = request_at # To make jobs idempotent
     post_data
   end
 

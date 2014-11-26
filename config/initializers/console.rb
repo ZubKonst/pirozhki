@@ -1,3 +1,3 @@
-if defined?(IRB) && ENV['RUBY_ENV'] != 'test'
+if defined?(IRB) && APP_ENV != 'test'
   AwesomePrint.irb!
 end

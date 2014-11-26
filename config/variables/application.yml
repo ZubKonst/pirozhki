@@ -1,0 +1,11 @@
+test:
+  instagram:
+    request_delay: 0
+
+development:
+  instagram:
+    request_delay: 0
+
+production:
+  instagram:
+    request_delay: 0

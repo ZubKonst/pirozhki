@@ -8,7 +8,7 @@ ActiveRecordMigrations.configure do |c|
   c.database_configuration = YAML.load_file(File.join(File.dirname(__FILE__), 'config/variables/database.yml'))
   c.schema_format = :ruby
   c.yaml_config = 'config/variables/database.yml'
-  c.environment = RUBY_ENV
+  c.environment = APP_ENV
   c.db_dir = 'db'
   c.migrations_paths = ['db/migrate']
   c.seed_loader = Seeder.new(File.join(File.dirname(__FILE__), 'db/seed.rb'))

@@ -4,8 +4,8 @@ class BuildPost
   sidekiq_options queue: :build_record
 
   def perform(post_data)
-    @post = build_post(post_data)
-    enqueue_export(@post)
+    post = build_post(post_data)
+    enqueue_export(post)
   end
 
 
