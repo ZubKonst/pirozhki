@@ -5,7 +5,7 @@ class FakeInstagramResponse
   extend Forwardable
 
   def initialize
-    @response = YAML.load_file(File.join(File.dirname(__FILE__), './instagram_response.yml'))
+    @response = YAML.load_file("#{APP_ROOT}/spec/helpers/instagram_response.yml")
   end
 
   def_delegators :@response, :sample

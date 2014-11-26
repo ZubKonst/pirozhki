@@ -1,9 +1,9 @@
 require 'yaml'
 
-@ruby_env = ENV['RUBY_ENV'] || 'production'
+@app_env = ENV['APP_ENV'] || 'production'
 
 god_configs = YAML.load_file(File.join(File.dirname(__FILE__), './variables/god.yml'))
-god_config = god_configs[@ruby_env]
+god_config = god_configs[@app_env]
 @app_path  = god_config[:app_path]
 
 God.pid_file_directory = File.join(@app_path, 'tmp/pids/')
@@ -13,7 +13,7 @@ God.watch do |w|
   w.group    = 'sidekiq_web'
   w.interval = 30.seconds
   w.dir = @app_path
-  w.env = { 'RUBY_ENV' => @ruby_env, 'BUNDLE_GEMFILE' => "#{@app_path}/Gemfile" }
+  w.env = { 'APP_ENV' => @app_env, 'BUNDLE_GEMFILE' => "#{@app_path}/Gemfile" }
   w.behavior(:clean_pid_file)
 
   w.start_grace = 10.seconds
@@ -40,7 +40,7 @@ sidekiq_workers.each do |sidekiq_worker|
     w.group    = 'sidekiq_workers'
     w.dir      = @app_path
     w.interval = 30.seconds
-    w.env      = { 'RUBY_ENV' => @ruby_env, 'BUNDLE_GEMFILE' => "#{@app_path}/Gemfile" }
+    w.env      = { 'APP_ENV' => @app_env, 'BUNDLE_GEMFILE' => "#{@app_path}/Gemfile" }
 
     w.start_grace = 10.seconds
     w.restart_grace = 10.seconds

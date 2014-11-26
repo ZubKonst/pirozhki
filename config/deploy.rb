@@ -10,7 +10,7 @@ require 'capistrano_colors'
 deploy_configs = YAML.load_file(File.join(File.dirname(__FILE__), './variables/deploy.yml'))
 deploy_config = deploy_configs[stage]
 
-set :ruby_env, stage
+set :app_env, stage
 set :domain, deploy_config[:domain]
 
 set :application, 'pirozhki'
@@ -92,7 +92,7 @@ def terminate_if_runing
 end
 
 def god_start
-  run "#{god_command} -c #{god_config_file}", env: { RUBY_ENV: ruby_env }
+  run "#{god_command} -c #{god_config_file}", env: { APP_ENV: app_env }
 end
 
 def god_exec(command)

@@ -26,14 +26,14 @@ cap sidekiq_workers:start (restart|stop)
 
 ##Init database on the server from project path:
 ```
-[RUBY_ENV=production] rake db:create
-[RUBY_ENV=production] rake db:migrate
-[RUBY_ENV=production] rake db:seed
+[APP_ENV=production] rake db:create
+[APP_ENV=production] rake db:migrate
+[APP_ENV=production] rake db:seed
 ```
 
 ##Run console:
 ```
-[RUBY_ENV=production] irb -r ./app.rb
+[APP_ENV=production] irb -r ./app.rb
 ```
 
 ##Useful examples:

@@ -1,10 +1,10 @@
 require 'yaml'
 
-ENV['RUBY_ENV'] ||= 'production'
-environment ENV['RUBY_ENV']
+ENV['APP_ENV'] ||= 'production'
+environment ENV['APP_ENV']
 
 sidekiq_web_configs = YAML.load_file(File.join(File.dirname(__FILE__), './variables/sidekiq_web.yml'))
-sidekiq_web_config = sidekiq_web_configs[ENV['RUBY_ENV']]
+sidekiq_web_config = sidekiq_web_configs[ENV['APP_ENV']]
 app_path = sidekiq_web_config[:app_path]
 
 directory app_path

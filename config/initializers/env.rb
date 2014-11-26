@@ -1,5 +1,5 @@
-RUBY_ENV = ENV['RUBY_ENV'] || ENV['RAILS_ENV'] || 'development'
-ENV['RAILS_ENV'] = ENV['RUBY_ENV'] = RUBY_ENV
+APP_ENV = ENV['APP_ENV'] || ENV['RUBY_ENV'] || ENV['RAILS_ENV'] || 'development'
+APP_ROOT = File.join(File.dirname(__FILE__), '../..' )
 
 require 'bundler'
-Bundler.require(:default, RUBY_ENV)
+Bundler.require(:default, APP_ENV)
