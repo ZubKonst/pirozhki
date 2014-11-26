@@ -1,6 +1,6 @@
 require 'yaml'
 
-logstash_configs = YAML.load_file(File.join(File.dirname(__FILE__), '../variables/logstash.yml'))
+logstash_configs = YAML.load_file("#{APP_ROOT}/config/variables/logstash.yml")
 logstash_config = logstash_configs[APP_ENV]
 
 $logstash =

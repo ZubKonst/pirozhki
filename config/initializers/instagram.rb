@@ -1,6 +1,6 @@
 require 'yaml'
 
-instagram_configs = YAML.load_file(File.join(File.dirname(__FILE__), '../variables/instagram.yml'))
+instagram_configs = YAML.load_file("#{APP_ROOT}/config/variables/instagram.yml")
 instagram_config = instagram_configs[APP_ENV]
 
 Instagram.configure do |config|
