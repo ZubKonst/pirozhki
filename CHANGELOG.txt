@@ -1,3 +1,4 @@
+- Add global APP_ENV and APP_ROOT.
 - Add app settings.
 - Remove sidekiq-benchmark.
 
