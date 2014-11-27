@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 # rails parts
 gem 'activerecord',  '4.1.8', require: 'active_record'
-gem 'activesupport', '4.1.8', require: %w[ active_support/concern ]
+gem 'activesupport', '4.1.8',
+    require: %w[ active_support/core_ext/numeric/time active_support/concern ]
 
 # databases
 gem 'active_record_migrations', require: false

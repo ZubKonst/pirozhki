@@ -1,0 +1,7 @@
+---
+:concurrency: 25
+:queues:
+  - [request_manager, 1]
+  - [api_request, 1]
+  - [build_record, 3]
+  - [logstash_export, 3]

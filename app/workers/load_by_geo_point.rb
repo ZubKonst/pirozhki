@@ -4,7 +4,7 @@ class LoadByGeoPoint
   # The job will be unique for the number of seconds configured (default 30 minutes) or until the job has been completed.
   sidekiq_options queue: :api_request,
                   unique: true,
-                  throttle: { threshold: 4_900, period: 1.hour.to_i, key: 'api_request' }
+                  throttle: { threshold: 80, period: 1.minute.to_i, key: 'api_request' }
 
   def perform(geo_point_id)
     request_at = Time.now.to_i # To make jobs idempotent
