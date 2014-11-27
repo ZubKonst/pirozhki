@@ -9,8 +9,8 @@ god_config = god_configs[@app_env]
 God.pid_file_directory = File.join(@app_path, 'tmp/pids/')
 
 God.watch do |w|
-  w.name = 'sidekiq_puma'
-  w.group    = 'sidekiq_web'
+  w.name = 'sidekiq_web'
+  w.group    = 'web'
   w.interval = 30.seconds
   w.dir = @app_path
   w.env = { 'APP_ENV' => @app_env, 'BUNDLE_GEMFILE' => "#{@app_path}/Gemfile" }
@@ -29,34 +29,29 @@ God.watch do |w|
 end
 
 
+God.watch do |w|
+  sidekiq_worker_pid = "#{@app_path}/tmp/pids/sidekiq_worker.pid"
 
-sidekiq_workers = %w[ sidekiq_manager sidekiq_api sidekiq_db sidekiq_export ]
+  w.name     = 'sidekiq_worker'
+  w.group    = 'workers'
+  w.dir      = @app_path
+  w.interval = 30.seconds
+  w.env      = { 'APP_ENV' => @app_env, 'BUNDLE_GEMFILE' => "#{@app_path}/Gemfile" }
 
-sidekiq_workers.each do |sidekiq_worker|
-  sidekiq_worker_pid = "#{@app_path}/tmp/pids/#{sidekiq_worker}.pid"
+  w.start_grace = 10.seconds
+  w.restart_grace = 10.seconds
 
-  God.watch do |w|
-    w.name     = sidekiq_worker
-    w.group    = 'sidekiq_workers'
-    w.dir      = @app_path
-    w.interval = 30.seconds
-    w.env      = { 'APP_ENV' => @app_env, 'BUNDLE_GEMFILE' => "#{@app_path}/Gemfile" }
+  w.pid_file = sidekiq_worker_pid
+  w.log = "#{@app_path}/log/god_sidekiq_worker.log"
 
-    w.start_grace = 10.seconds
-    w.restart_grace = 10.seconds
+  w.start = "cd #{@app_path} && bundle exec sidekiq "+
+    "-C #{@app_path}/config/variables/sidekiq_worker.yml "+
+    "-d -P #{sidekiq_worker_pid} "+
+    "-r #{@app_path}/app.rb "+
+    "-L #{@app_path}/log/sidekiq_worker.log "
 
-    w.pid_file = sidekiq_worker_pid
-    w.log = "#{@app_path}/log/god_#{sidekiq_worker}.log"
+  w.stop  = "cd #{@app_path} && bundle exec sidekiqctl quiet #{sidekiq_worker_pid} 10"
 
-    w.start = "cd #{@app_path} && bundle exec sidekiq "+
-      "-C #{@app_path}/config/variables/#{sidekiq_worker}.yml "+
-      "-d -P #{sidekiq_worker_pid} "+
-      "-r #{@app_path}/app.rb " +
-      "-L #{@app_path}/log/#{sidekiq_worker}.log "
-
-    w.stop  = "cd #{@app_path} && bundle exec sidekiqctl quiet #{sidekiq_worker_pid} 10"
-
-    w.keepalive(interval: 5.seconds, memory_max: 300.megabytes, cpu_max: 80.percent)
-  end
+  w.keepalive(interval: 5.seconds, memory_max: 300.megabytes, cpu_max: 80.percent)
 end
 

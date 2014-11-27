@@ -16,8 +16,8 @@ Pirozhki is a [sidekiq](http://sidekiq.org)-based utility for collecting data fr
 - Capistrano tips:
 ```
 cap deploy:start (restart|stop)
-cap sidekiq_web:start (restart|stop)
-cap sidekiq_workers:start (restart|stop)
+cap web:start (restart|stop)
+cap workers:start (restart|stop)
 ```
 
 ##Run Pirozhki locally:
