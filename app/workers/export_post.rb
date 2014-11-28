@@ -1,8 +1,8 @@
-class LogstashExport
+class ExportPost
   include Sidekiq::Worker
 
   # The job will be unique for the number of seconds configured (default 30 minutes) or until the job has been completed.
-  sidekiq_options queue: :logstash_export,
+  sidekiq_options queue: :export_post,
                   unique: true
 
 
@@ -16,7 +16,7 @@ class LogstashExport
   end
 
   def export_post(post)
-    $logstash.info( post.export_data )
+    $exporter.info( post.export_data )
   end
 end
 

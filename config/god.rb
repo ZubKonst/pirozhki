@@ -2,9 +2,8 @@ require 'yaml'
 
 @app_env = ENV['APP_ENV'] || 'production'
 
-god_configs = YAML.load_file(File.join(File.dirname(__FILE__), './variables/god.yml'))
-god_config = god_configs[@app_env]
-@app_path  = god_config[:app_path]
+configs = YAML.load_file(File.join(File.dirname(__FILE__), './variables/application.yml'))
+@app_path  = configs[@app_env]['app_path']
 
 God.pid_file_directory = File.join(@app_path, 'tmp/pids/')
 
@@ -45,7 +44,7 @@ God.watch do |w|
   w.log = "#{@app_path}/log/god_sidekiq_worker.log"
 
   w.start = "cd #{@app_path} && bundle exec sidekiq "+
-    "-C #{@app_path}/config/variables/sidekiq_worker.yml "+
+    "-C #{@app_path}/config/variables/sidekiq.yml "+
     "-d -P #{sidekiq_worker_pid} "+
     "-r #{@app_path}/app.rb "+
     "-L #{@app_path}/log/sidekiq_worker.log "

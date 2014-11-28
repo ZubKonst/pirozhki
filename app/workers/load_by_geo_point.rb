@@ -2,9 +2,9 @@ class LoadByGeoPoint
   include Sidekiq::Worker
 
   # The job will be unique for the number of seconds configured (default 30 minutes) or until the job has been completed.
-  sidekiq_options queue: :api_request,
+  sidekiq_options queue: :load_by_geo_point,
                   unique: true,
-                  throttle: { threshold: 80, period: 1.minute.to_i, key: 'api_request' }
+                  throttle: { threshold: 80, period: 1.minute.to_i, key: 'instagram_api_request' }
 
   def perform(geo_point_id)
     request_at = Time.now.to_i # To make jobs idempotent

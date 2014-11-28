@@ -1,7 +1,7 @@
 class BuildPost
   include Sidekiq::Worker
 
-  sidekiq_options queue: :build_record
+  sidekiq_options queue: :build_post
 
   def perform(post_data)
     post = build_post(post_data)
@@ -14,7 +14,7 @@ class BuildPost
   end
 
   def enqueue_export(post)
-    LogstashExport.perform_async( post.id )
+    ExportPost.perform_async( post.id )
   end
 end
 

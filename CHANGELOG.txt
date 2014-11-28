@@ -1,3 +1,4 @@
+- Move all configs to application.yml.
 - Use single sidekiq worker for all queues.
 - Add global APP_ENV and APP_ROOT.
 - Add app settings.

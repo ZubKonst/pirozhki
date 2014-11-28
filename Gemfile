@@ -9,11 +9,11 @@ gem 'activesupport', '4.1.8',
 gem 'active_record_migrations', require: false
 gem 'pg'
 gem 'hiredis'
-gem 'redis', require:  %w[ redis redis/connection/hiredis ]
+gem 'redis', require: %w[ redis redis/connection/hiredis ]
 gem 'redis-namespace'
 
 # export
-gem 'logstash-logger'
+gem 'logstash-logger', require: false
 
 # support
 gem 'awesome_print'
