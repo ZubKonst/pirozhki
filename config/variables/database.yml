@@ -1,6 +1,6 @@
 development:
   adapter: postgresql
-  pool: 5
+  pool: 30
   encoding: unicode
   database: pirozhki_development
   username: dbuser
@@ -8,7 +8,7 @@ development:
 
 test:
   adapter: postgresql
-  pool: 5
+  pool: 30
   encoding: unicode
   database: pirozhki_test
   username: dbuser
@@ -16,7 +16,7 @@ test:
 
 production:
   adapter: postgresql
-  pool: 5
+  pool: 30
   encoding: unicode
   database: pirozhki_production
   username: pirozhki

@@ -10,7 +10,7 @@ require 'capistrano_colors'
 deploy_configs = YAML.load_file(File.join(File.dirname(__FILE__), './variables/deploy.yml'))
 deploy_config = deploy_configs[stage]
 
-set :ruby_env, stage
+set :app_env, stage
 set :domain, deploy_config[:domain]
 
 set :application, 'pirozhki'
@@ -38,29 +38,29 @@ set :god_port, 17770
 
 namespace :deploy do
   task :restart do
-    god_exec 'restart sidekiq_web'
-    god_exec 'restart sidekiq_workers'
+    god_exec 'restart web'
+    god_exec 'restart workers'
   end
   task :start do
-    god_exec 'start sidekiq_web'
-    god_exec 'start sidekiq_workers'
+    god_exec 'start web'
+    god_exec 'start workers'
   end
   task :stop do
-    god_exec 'stop sidekiq_web'
-    god_exec 'stop sidekiq_workers'
+    god_exec 'stop web'
+    god_exec 'stop workers'
   end
 end
 
-namespace :sidekiq_workers do
-  task(:restart) { god_exec 'restart sidekiq_workers' }
-  task(:start) { god_exec 'start sidekiq_workers' }
-  task(:stop) { god_exec 'stop sidekiq_workers' }
+namespace :workers do
+  task(:restart) { god_exec 'restart workers' }
+  task(:start) { god_exec 'start workers' }
+  task(:stop) { god_exec 'stop workers' }
 end
 
-namespace :sidekiq_web do
-  task(:restart) { god_exec 'restart sidekiq_web' }
-  task(:start) { god_exec 'start sidekiq_web' }
-  task(:stop) { god_exec 'stop sidekiq_web' }
+namespace :web do
+  task(:restart) { god_exec 'restart web' }
+  task(:start) { god_exec 'start web' }
+  task(:stop) { god_exec 'stop web' }
 end
 
 
@@ -92,7 +92,7 @@ def terminate_if_runing
 end
 
 def god_start
-  run "#{god_command} -c #{god_config_file}", env: { RUBY_ENV: ruby_env }
+  run "#{god_command} -c #{god_config_file}", env: { APP_ENV: app_env }
 end
 
 def god_exec(command)

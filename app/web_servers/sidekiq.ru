@@ -4,10 +4,11 @@ require_relative '../../app'
 require 'sidekiq/web'
 require 'sidetiq/web'
 
-map '/sidekiq' do
-  if defined?(SIDEKIQ_WEB) && SIDEKIQ_WEB[:user] && SIDEKIQ_WEB[:pass]
+map '/' do
+  if Settings.web['username'] && Settings.web['password']
     use Rack::Auth::Basic, 'Protected Area' do |username, password|
-      username == SIDEKIQ_WEB[:user] && password == SIDEKIQ_WEB[:pass]
+      (username == Settings.web['username'].to_s) &&
+      (password == Settings.web['password'].to_s)
     end
   end
 
