@@ -1,4 +1,4 @@
-ENV['RUBY_ENV'] = 'test'
+ENV['APP_ENV'] = 'test'
 
 ## TestCoverage ##
 if ENV['COVERAGE'] || ENV['TRAVIS']
@@ -14,6 +14,8 @@ if ENV['COVERAGE'] || ENV['TRAVIS']
     add_group 'RecordBuilders', 'app/record_builders'
     add_group 'SocialClients', 'app/social_clients'
     add_group 'Workers', 'app/workers'
+
+    add_filter '/config/'
   end
 end
 ###################

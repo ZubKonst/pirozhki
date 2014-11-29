@@ -1,0 +1,7 @@
+---
+:concurrency: 25
+:queues:
+  - [request_manager, 1]
+  - [load_by_geo_point, 1]
+  - [build_post, 3]
+  - [export_post, 3]

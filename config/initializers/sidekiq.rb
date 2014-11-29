@@ -14,12 +14,7 @@ module Sidekiq
   end
 end
 
-sidekiq_web_configs = YAML.load_file(File.join(File.dirname(__FILE__), '../variables/sidekiq_web.yml'))
-sidekiq_web_config = sidekiq_web_configs[RUBY_ENV]
-SIDEKIQ_WEB = { user: sidekiq_web_config[:username], pass: sidekiq_web_config[:password] }
-
-redis_configs = YAML.load_file(File.join(File.dirname(__FILE__), '../variables/redis.yml'))
-redis_config = redis_configs[RUBY_ENV]
+redis_config = YAML.load_file("#{APP_ROOT}/config/variables/redis.yml")[APP_ENV]
 
 Sidekiq.default_worker_options = { 'backtrace' => true }
 
