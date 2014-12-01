@@ -1,0 +1,34 @@
+db:
+  image: postgres
+  environment:
+    POSTGRES_USER: pirozhki
+    POSTGRES_PASSWORD: mysecretpassword
+  volumes_from:
+    - db_volume
+db_volume:
+  volumes:
+   - tmp/:/var/lib/postgresql/data \ postgres
+
+redis:
+  image: redis
+  command: redis-server /usr/local/etc/redis/redis.conf
+  volumes_from:
+    - redis_volume
+redis_volume:
+  volumes:
+   - tmp/:/data
+
+web:
+  build: .
+  command: puma -C config/sidekiq_web.rb
+  ports:
+    - 80:80
+  links:
+    - redis
+
+sidekiq:
+  build: .
+  command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml -d -L log/sidekiq_worker.log
+  links:
+    - db
+    - redis

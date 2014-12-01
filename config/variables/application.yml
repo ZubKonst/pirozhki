@@ -19,7 +19,7 @@ development:
 
 production:
   <<: *default_settings
-  app_path: /var/www/pirozhki/current
+  app_path: /home/app/pirozhki/current
   web:
     username: admin
     password: REPLACE_ME
