@@ -1,22 +1,23 @@
-db:
-  image: postgres
+pirozhki_db_volume:
+  image: ubuntu:14.04
+  command: true
+  volumes:
+   - /var/lib/postgresql/data
+   - /data
+
+pirozhki_postgres:
+  image: postgres:9.3
   environment:
     POSTGRES_USER: pirozhki
     POSTGRES_PASSWORD: mysecretpassword
   volumes_from:
-    - db_volume
-db_volume:
-  volumes:
-   - tmp/:/var/lib/postgresql/data \ postgres
+    - pirozhki_db_volume
 
-redis:
-  image: redis
-  command: redis-server /usr/local/etc/redis/redis.conf
+pirozhki_redis:
+  image: redis:2.8
+  command: redis-server --appendonly yes
   volumes_from:
-    - redis_volume
-redis_volume:
-  volumes:
-   - tmp/:/data
+    - pirozhki_db_volume
 
 web:
   build: .
@@ -24,11 +25,11 @@ web:
   ports:
     - 80:80
   links:
-    - redis
+    - pirozhki_redis:redis
 
 sidekiq:
   build: .
   command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml -d -L log/sidekiq_worker.log
   links:
-    - db
-    - redis
+    - pirozhki_postgres:postgres
+    - pirozhki_redis:redis

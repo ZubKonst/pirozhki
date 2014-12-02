@@ -36,6 +36,10 @@ cap workers:start (restart|stop)
 [APP_ENV=production] irb -r ./app.rb
 ```
 
+##Docker notes
+  [Step-by-step guide](dev_ops/docker_notes.md)
+
+
 ##Useful examples:
 - Connecting with ELK (Elasticsearch, Logstash and Kibana) stack.
   - Posts over time ![Images over time](info/images_over_time.png)
