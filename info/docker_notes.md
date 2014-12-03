@@ -10,9 +10,9 @@ docker run \
 ###Connect to pirozhki_db_volume
 ```
 docker run \
-  --rm \
-  -it \
   --volumes-from pirozhki_db_volume \
+  -it \
+  --rm=true \
   ubuntu:14.04 /bin/bash
 ```
 
@@ -30,9 +30,9 @@ docker run \
 ###Connect to postgres
 ```
 docker run \
-  -it \
   --link pirozhki_postgres:postgres \
-  --rm \
+  -it \
+  --rm=true \
   postgres:9.3 sh -c 'exec psql -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U pirozhki'
 ```
 
@@ -51,11 +51,11 @@ docker run \
 docker run \
   --link pirozhki_redis:redis \
   -it \
-  --rm \
+  --rm=true \
   redis sh -c 'exec redis-cli -h "$REDIS_PORT_6379_TCP_ADDR" -p "$REDIS_PORT_6379_TCP_PORT"'
 ```
 
 ### Build pirozhki image
 ```
-docker build .
+docker build -t="zubkonst/pirozhki:v0.2.3" .
 ```

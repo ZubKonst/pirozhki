@@ -1,7 +1,10 @@
 # Created by .gitignore support plugin (hsz.mobi)
 
 # Pirozhki Project
+config/variables/application.yml
+config/variables/database.yml
 config/variables/deploy.yml
+config/variables/redis.yml
 
 ### Ruby template
 *.gem

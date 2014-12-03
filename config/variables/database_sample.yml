@@ -1,5 +1,4 @@
 development:
-  host: db
   adapter: postgresql
   pool: 30
   encoding: unicode

@@ -23,6 +23,7 @@ cap workers:start (restart|stop)
 ##Run Pirozhki locally:
 - Fill with your data configs from `APP/config/variables/...`
 - Enjoy [foreman](https://github.com/ddollar/foreman).
+- Or use [docker](http://docker.com) [Step-by-step guide](info/docker_notes.md)
 
 ##Init database on the server from project path:
 ```
@@ -35,10 +36,6 @@ cap workers:start (restart|stop)
 ```
 [APP_ENV=production] irb -r ./app.rb
 ```
-
-##Docker notes
-  [Step-by-step guide](dev_ops/docker_notes.md)
-
 
 ##Useful examples:
 - Connecting with ELK (Elasticsearch, Logstash and Kibana) stack.
