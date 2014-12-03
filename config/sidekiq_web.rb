@@ -16,4 +16,5 @@ state_path "#{@app_path}/tmp/pids/sidekiq_web.state"
 stdout_redirect "#{@app_path}/log/sidekiq_web_stdout.log", "#{@app_path}/log/sidekiq_web_stderr.log"
 
 threads 1, 2
-bind "unix:///#{@app_path}/tmp/pids/sidekiq_web.sock"
+bind 'tcp://0.0.0.0:9292'
+# bind "unix:///#{@app_path}/tmp/pids/sidekiq_web.sock"

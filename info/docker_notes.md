@@ -1,4 +1,4 @@
-###Create pirozhki_db_volume
+### Create pirozhki_db_volume
 ```
 docker run \
   --name pirozhki_db_volume \
@@ -7,7 +7,7 @@ docker run \
   ubuntu:14.04 true
 ```
 
-###Connect to pirozhki_db_volume
+### Run pirozhki_db_volume console
 ```
 docker run \
   --volumes-from pirozhki_db_volume \
@@ -16,7 +16,7 @@ docker run \
   ubuntu:14.04 /bin/bash
 ```
 
-###Run postgres
+### Run postgres
 ```
 docker run \
   --name pirozhki_postgres \
@@ -27,7 +27,7 @@ docker run \
   postgres:9.3
 ```
 
-###Connect to postgres
+### Run postgres console
 ```
 docker run \
   --link pirozhki_postgres:postgres \
@@ -36,7 +36,7 @@ docker run \
   postgres:9.3 sh -c 'exec psql -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U pirozhki'
 ```
 
-###Run redis
+### Run redis
 ```
 docker run \
   --name pirozhki_redis \
@@ -46,7 +46,7 @@ docker run \
 ```
 
 
-###Connect to redis
+### Run redis console
 ```
 docker run \
   --link pirozhki_redis:redis \
@@ -57,5 +57,60 @@ docker run \
 
 ### Build pirozhki image
 ```
-docker build -t="zubkonst/pirozhki:v0.2.3" .
+docker build -t="zubkonst/pirozhki:latest" .
 ```
+
+### Init pirozhki database
+```
+docker run \
+  --link pirozhki_postgres:postgres \
+  -e APP_ENV=development \
+  --rm=true \
+  zubkonst/pirozhki rake db:setup
+```
+
+
+### Run pirozhki console
+```
+docker run \
+  --link pirozhki_redis:redis \
+  --link pirozhki_postgres:postgres \
+  -e APP_ENV=development \
+  -it \
+  --rm=true \
+  zubkonst/pirozhki irb -r ./app.rb
+```
+
+### Run pirozhki rspec
+```
+docker run \
+  --link pirozhki_postgres:postgres \
+  -e APP_ENV=test \
+  -e COVERAGE=true \
+  -it \
+  --rm=true \
+  zubkonst/pirozhki rspec
+```
+
+### Run pirozhki web
+```
+docker run \
+  --name pirozhki_web \
+  --link pirozhki_redis:redis \
+  -e APP_ENV=development \
+  -p 9292:9292 \
+  -d \
+  zubkonst/pirozhki puma -C config/sidekiq_web.rb
+```
+
+### Run pirozhki workers
+```
+docker run \
+  --name pirozhki_workers \
+  --link pirozhki_postgres:postgres \
+  --link pirozhki_redis:redis \
+  -e APP_ENV=development \
+  -d \
+  zubkonst/pirozhki sidekiq -r ./app.rb -C config/variables/sidekiq.yml
+```
+

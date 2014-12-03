@@ -19,17 +19,21 @@ pirozhki_redis:
   volumes_from:
     - pirozhki_db_volume
 
-web:
+pirozhki_web:
   build: .
   command: puma -C config/sidekiq_web.rb
+  environment:
+    APP_ENV: production
   ports:
-    - 80:80
+    - 9292:9292
   links:
     - pirozhki_redis:redis
 
-sidekiq:
+pirozhki_workers:
   build: .
-  command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml -d -L log/sidekiq_worker.log
+  command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml
+  environment:
+    APP_ENV: production
   links:
     - pirozhki_postgres:postgres
     - pirozhki_redis:redis
