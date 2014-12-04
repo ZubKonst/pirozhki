@@ -1,19 +1,22 @@
 require 'yaml'
+require_relative 'initializers/env'
 
-@app_env = ENV['APP_ENV'] || 'production'
-environment @app_env
+environment APP_ENV
 
-configs = YAML.load_file(File.join(File.dirname(__FILE__), './variables/application.yml'))
-@app_path = configs[@app_env]['app_path']
-raise "Empty 'app_path' variable for #{@app_env}" unless @app_path
+directory APP_ROOT
+rackup "#{APP_ROOT}/app/web_servers/sidekiq.ru"
 
+pidfile "#{APP_ROOT}/tmp/pids/sidekiq_web.pid"
+state_path "#{APP_ROOT}/tmp/pids/sidekiq_web.state"
 
-directory @app_path
-rackup "#{@app_path}/app/web_servers/sidekiq.ru"
+logging_config = Settings.logging
 
-pidfile "#{@app_path}/tmp/pids/sidekiq_web.pid"
-state_path "#{@app_path}/tmp/pids/sidekiq_web.state"
-stdout_redirect "#{@app_path}/log/sidekiq_web_stdout.log", "#{@app_path}/log/sidekiq_web_stderr.log"
+case logging_config.type
+  when 'file'
+    stdout_redirect "#{APP_ROOT}/log/sidekiq_web_stdout.log", "#{APP_ROOT}/log/sidekiq_web_stderr.log"
+  else
+    nil #STDOUT
+end
 
 threads 1, 2
 bind 'tcp://0.0.0.0:9292'

@@ -3,3 +3,5 @@ test:
     request_delay: 0
   export:
     type: stdout
+  logging:
+    type: stdout

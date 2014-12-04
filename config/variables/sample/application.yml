@@ -10,6 +10,8 @@ common: &default_settings
     password:
   export:
     type: stdout
+  logging:
+    type: stdout
 
 test:
   <<: *default_settings
@@ -27,3 +29,5 @@ production:
     type: logstash_tcp
     host: localhost
     port: 5229
+  logging:
+    type: file

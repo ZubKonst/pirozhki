@@ -110,7 +110,8 @@ docker run \
   --link pirozhki_postgres:postgres \
   --link pirozhki_redis:redis \
   -e APP_ENV=development \
-  -d \
+  -it \
+  --rm=true \
   zubkonst/pirozhki sidekiq -r ./app.rb -C config/variables/sidekiq.yml
 ```
 
