@@ -4,6 +4,6 @@ rvm:
 services:
   - redis-server
 before_script:
-  - cp config/variables/database.yml.travis config/variables/database.yml
+  - cp config/variables/travis-ci/* config/variables/
   - psql -c 'create database travis_ci_test;' -U postgres
   - APP_ENV=test bundle exec rake db:migrate

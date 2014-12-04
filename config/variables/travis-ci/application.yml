@@ -1,0 +1,5 @@
+test:
+  instagram:
+    request_delay: 0
+  export:
+    type: stdout
