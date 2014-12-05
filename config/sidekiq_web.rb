@@ -19,5 +19,5 @@ case logging_config.type
 end
 
 threads 1, 2
-bind 'tcp://0.0.0.0:9292'
+bind 'tcp://0.0.0.0:3000'
 # bind "unix:///#{@app_path}/tmp/pids/sidekiq_web.sock"

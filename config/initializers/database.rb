@@ -4,4 +4,4 @@ database_config =  YAML.load_file("#{APP_ROOT}/config/variables/database.yml")[A
 raise "Empty database_config for #{APP_ENV}" unless database_config
 
 ActiveRecord::Base.establish_connection(database_config)
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+ActiveRecord::Base.logger = Logger.new(STDOUT) unless APP_ENV == 'test'
