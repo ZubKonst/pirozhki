@@ -15,7 +15,12 @@ fig run -e APP_ENV=test -e COVERAGE=true --rm workers rspec
 
 ### Run pirozhki (web + workers)
 ```
-fig up web workers
+fig start web workers
+```
+
+### Stop pirozhki (web + workers)
+```
+fig stop web workers
 ```
 
 ### Run pirozhki console (irb)

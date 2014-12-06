@@ -23,7 +23,7 @@ cap workers:start (restart|stop)
 ##Run Pirozhki locally:
 - Fill with your data configs from `APP/config/variables/...`
 - Enjoy [foreman](https://github.com/ddollar/foreman).
-- Or use [docker](http://docker.com) [Step-by-step guide](info/docker_notes.md)
+- Or use Docker with [fig](http://fig.sh) [Step-by-step guide](info/fig_notes.md)
 
 ##Init database on the server from project path:
 ```
