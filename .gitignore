@@ -5,6 +5,7 @@ config/variables/application.yml
 config/variables/database.yml
 config/variables/deploy.yml
 config/variables/redis.yml
+config/variables/sidekiq.yml
 config/variables/my_variables/*
 /bin/
 
