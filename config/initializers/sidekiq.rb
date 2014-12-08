@@ -15,6 +15,7 @@ module Sidekiq
 end
 
 redis_config = YAML.load_file("#{APP_ROOT}/config/variables/redis.yml")[APP_ENV]
+raise "Empty redis_config for #{APP_ENV}" unless redis_config
 
 Sidekiq.default_worker_options = { 'backtrace' => true }
 

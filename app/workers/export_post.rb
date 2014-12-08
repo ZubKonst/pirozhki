@@ -1,10 +1,7 @@
 class ExportPost
   include Sidekiq::Worker
 
-  # The job will be unique for the number of seconds configured (default 30 minutes) or until the job has been completed.
-  sidekiq_options queue: :export_post,
-                  unique: true
-
+  sidekiq_options queue: :export_post
 
   def perform(post_id)
     post = load_post(post_id)

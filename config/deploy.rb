@@ -7,8 +7,8 @@ require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'capistrano_colors'
 
-deploy_configs = YAML.load_file(File.join(File.dirname(__FILE__), './variables/deploy.yml'))
-deploy_config = deploy_configs[stage]
+deploy_config = YAML.load_file(File.join(File.dirname(__FILE__), './variables/deploy.yml'))[stage]
+raise "Empty deploy_config for #{stage}" unless deploy_config
 
 set :app_env, stage
 set :domain, deploy_config[:domain]
