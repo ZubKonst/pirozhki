@@ -11,8 +11,8 @@ Pirozhki is a [sidekiq](http://sidekiq.org)-based utility for collecting data fr
 - Pirozhki with instagram and geotags. (GeoPoint table.)
 
 ##Run Pirozhki on the server:
-- Fill with your data configs from `APP/config/variables/...` and put configs into server `{deploy_dir}/shared/variables`  
-- Fill with your data `deploy_sample.yml`, rename to `deploy.yml` and use capistrano. `/config/variables/deploy.yml` is gitignored.
+- Copy all files from `APP/config/variables/sample/` to `{deploy_dir}/shared/variables` and fill with your data.
+- Use [capistrano](https://github.com/capistrano/capistrano).
 - Capistrano tips:
 ```
 cap deploy:start (restart|stop)
@@ -21,8 +21,9 @@ cap workers:start (restart|stop)
 ```
 
 ##Run Pirozhki locally:
-- Fill with your data configs from `APP/config/variables/...`
-- Enjoy [foreman](https://github.com/ddollar/foreman).
+- Copy all files from `APP/config/variables/sample/` to `APP/config/variables/` and fill with your data.
+- Use [foreman](https://github.com/ddollar/foreman).
+- Or use Docker with [fig](http://fig.sh). [Step-by-step guide](info/fig_notes.md).
 
 ##Init database on the server from project path:
 ```

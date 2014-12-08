@@ -32,7 +32,7 @@ class LoadByGeoPoint
   # In realtime we can not collect correct data about likes and comments.
   # 5 days delay will help.
   def request_max_time
-    delay = ::Settings.instagram.request_delay
+    delay = Settings.instagram.request_delay
     delay == 0 ? nil : (Time.now.to_i - delay)
   end
 

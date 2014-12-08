@@ -1,0 +1,4 @@
+test:
+  :namespace: pirozhki_test
+  :driver: :hiredis
+  :url: redis://redis:6379/0

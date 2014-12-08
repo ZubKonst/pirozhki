@@ -2,8 +2,9 @@ require 'yaml'
 
 @app_env = ENV['APP_ENV'] || 'production'
 
-configs = YAML.load_file(File.join(File.dirname(__FILE__), './variables/application.yml'))
-@app_path  = configs[@app_env]['app_path']
+config = YAML.load_file(File.join(File.dirname(__FILE__), './variables/application.yml'))[@app_env]
+@app_path  = config['app_path']
+raise "Empty 'app_path' variable for #{@app_env}" unless @app_path
 
 God.pid_file_directory = File.join(@app_path, 'tmp/pids/')
 

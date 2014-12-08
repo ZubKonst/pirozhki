@@ -1,0 +1,10 @@
+test:
+  instagram:
+    proxy:
+    request_delay: 0
+    client_id: REPLACE_ME
+    client_secret: REPLACE_ME
+  export:
+    type: stdout
+  logging:
+    type: stdout

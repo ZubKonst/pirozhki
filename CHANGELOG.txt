@@ -1,3 +1,9 @@
+Pirozhki 0.3.0, 2014-12-07
+--------------------------
+- Config and run fig.
+- Run Pirozhki in Docker.
+- Add Docker image.
+
 Pirozhki 0.2.3, 2014-11-27
 --------------------------
 - Move all configs to application.yml.
