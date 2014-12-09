@@ -1,26 +1,25 @@
 development:
   adapter: postgresql
-  pool: 30
   encoding: unicode
-  host: localhost
+  pool: 30
+  host: postgres
   database: pirozhki_development
-  username: dbuser
-  password:
+  username: pirozhki
+  password: mysecretpassword
 
 test:
   adapter: postgresql
-  pool: 30
   encoding: unicode
-  host: localhost
+  pool: 30
+  host: postgres
   database: pirozhki_test
-  username: dbuser
-  password:
+  username: pirozhki
+  password: mysecretpassword
 
 production:
   adapter: postgresql
   pool: 30
   encoding: unicode
-  host: localhost
   database: pirozhki_production
   username: pirozhki
   password: REPLACE_ME
