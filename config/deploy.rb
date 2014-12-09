@@ -17,7 +17,7 @@ set :application, 'pirozhki'
 set :deploy_to, deploy_config[:deploy_to]
 set :keep_releases, 3
 set :normalize_asset_timestamps, false
-set :shared_children, %w( log tmp/pids config/variables )
+set :shared_children, %w( log pids config/variables )
 
 role :web, domain
 role :app, domain, primary: true
