@@ -20,4 +20,3 @@ end
 
 threads 1, 2
 bind 'tcp://0.0.0.0:3000'
-# bind "unix:///#{@app_path}/pids/sidekiq_web.sock"

@@ -1,7 +1,0 @@
-production:
-  :domain: user@127.0.0.1
-  :repository: git@github.com:ZubKonst/pirozhki.git
-  :branch: master
-  :deploy_to: /home/app/pirozhki
-  :rvm_ruby_string: ruby-2.1.2@pirozhki
-

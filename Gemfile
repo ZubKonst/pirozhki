@@ -33,17 +33,11 @@ gem 'sinatra'
 gem 'sidekiq-throttler'
 gem 'sidekiq-unique-jobs'
 gem 'sidetiq'
-gem 'god'
 
 # gem 'airbrake'
 # gem 'newrelic'
 
-
 group :development do
-  gem 'capistrano', '~> 2.15.5'
-  gem 'capistrano_colors'
-  gem 'rvm-capistrano'
-
   gem 'foreman'
 end
 
