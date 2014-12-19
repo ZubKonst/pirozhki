@@ -1,12 +1,13 @@
 require 'yaml'
 
-export_config = Settings.export
+export_config = Settings.export.to_hash
 
 $exporter =
-  case export_config.type
-    when 'logstash_tcp'
+  case export_config['type']
+    when /\Alogstash_.+/
       require 'logstash-logger'
-      LogStashLogger.new(type: :tcp, host: export_config['host'], port: export_config['port'])
+      export_config['type'].slice!('logstash_')
+      LogStashLogger.new(export_config.symbolize_keys)
     else
       Logger.new(STDOUT)
   end
