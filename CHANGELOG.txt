@@ -1,3 +1,5 @@
+Pirozhki 0.4.0, 2014-12-26
+--------------------------
 - Using travis-ci container-based infrastructure
 - Remove post counters. (Need to rebuild database)
 - Add different logstash inputs support.
