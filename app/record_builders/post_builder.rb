@@ -12,12 +12,6 @@ class PostBuilder < BaseBuilder
       exists_instagram_ids = exists_instagram_ids.to_set
       posts_data.select { |t| !exists_instagram_ids.include?(t['id']) }
     end
-
-    def find_or_create_with_counter!(post_data)
-      post = PostBuilder.new(post_data).find_or_create!
-      PostCounterBuilder.new(post_record: post, raw_post_data: post_data).find_or_create!
-      post
-    end
   end
 
   def attrs
@@ -29,6 +23,7 @@ class PostBuilder < BaseBuilder
 
     base_attrs.merge! records_attrs
     base_attrs.merge! content_attrs
+    base_attrs.merge! counter_attrs
     base_attrs.merge! time_attrs
     base_attrs
   end
@@ -58,6 +53,13 @@ class PostBuilder < BaseBuilder
       instagram_link: @data['link'],
       image_link: image_link,
       video_link: video_link
+    }
+  end
+
+  def counter_attrs
+    {
+      likes_count:    @data['likes']['count'],
+      comments_count: @data['comments']['count'],
     }
   end
 

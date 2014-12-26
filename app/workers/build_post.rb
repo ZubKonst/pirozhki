@@ -8,9 +8,8 @@ class BuildPost
     enqueue_export(post)
   end
 
-
   def build_post(post_data)
-    PostBuilder.find_or_create_with_counter!(post_data)
+    PostBuilder.new(post_data).find_or_create!
   end
 
   def enqueue_export(post)

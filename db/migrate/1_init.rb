@@ -17,18 +17,12 @@ class Init < ActiveRecord::Migration
       t.text :image_link,      null: false
       t.text :video_link
 
+      t.integer :likes_count,    null: false
+      t.integer :comments_count, null: false
+
       t.text :caption
     end
     add_index :posts, :instagram_id, unique: true
-
-    create_table :post_counters do |t|
-      t.belongs_to :post,        null: false
-      t.integer :likes_count,    null: false
-      t.integer :comments_count, null: false
-      t.integer :created_time,   null: false
-    end
-    add_index :post_counters, [:post_id, :created_time], unique: true
-
 
     create_table :users do |t|
       t.integer :instagram_id, null: false

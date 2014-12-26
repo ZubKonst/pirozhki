@@ -1,3 +1,4 @@
+- Remove post counters. (Need to rebuild database)
 - Add different logstash inputs support.
 - Move Docker staff to https://github.com/ZubKonst/pirozhki-docker.
 
