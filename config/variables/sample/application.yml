@@ -1,5 +1,4 @@
 common: &default_settings
-  app_path:
   instagram:
     proxy:
     request_delay: 0
@@ -21,7 +20,6 @@ development:
 
 production:
   <<: *default_settings
-  app_path: /home/app/pirozhki/current
   web:
     username: admin
     password: REPLACE_ME

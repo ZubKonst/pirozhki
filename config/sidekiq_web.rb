@@ -6,8 +6,8 @@ environment APP_ENV
 directory APP_ROOT
 rackup "#{APP_ROOT}/app/web_servers/sidekiq.ru"
 
-pidfile "#{APP_ROOT}/tmp/pids/sidekiq_web.pid"
-state_path "#{APP_ROOT}/tmp/pids/sidekiq_web.state"
+pidfile "#{APP_ROOT}/pids/sidekiq_web.pid"
+state_path "#{APP_ROOT}/pids/sidekiq_web.state"
 
 logging_config = Settings.logging
 
@@ -20,4 +20,3 @@ end
 
 threads 1, 2
 bind 'tcp://0.0.0.0:3000'
-# bind "unix:///#{@app_path}/tmp/pids/sidekiq_web.sock"

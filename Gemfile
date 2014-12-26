@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # rails parts
-gem 'activerecord',  '4.1.8', require: 'active_record'
-gem 'activesupport', '4.1.8',
+gem 'activerecord',  '4.2.0', require: 'active_record'
+gem 'activesupport', '4.2.0',
     require: %w[ active_support/core_ext/numeric/time active_support/concern ]
 
 # databases
@@ -33,17 +33,11 @@ gem 'sinatra'
 gem 'sidekiq-throttler'
 gem 'sidekiq-unique-jobs'
 gem 'sidetiq'
-gem 'god'
 
 # gem 'airbrake'
 # gem 'newrelic'
 
-
 group :development do
-  gem 'capistrano', '~> 2.15.5'
-  gem 'capistrano_colors'
-  gem 'rvm-capistrano'
-
   gem 'foreman'
 end
 

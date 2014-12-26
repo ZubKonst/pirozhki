@@ -10,31 +10,22 @@ Pirozhki is a [sidekiq](http://sidekiq.org)-based utility for collecting data fr
 ##Available types of Pirozhki:
 - Pirozhki with instagram and geotags. (GeoPoint table.)
 
-##Run Pirozhki on the server:
-- Copy all files from `APP/config/variables/sample/` to `{deploy_dir}/shared/variables` and fill with your data.
-- Use [capistrano](https://github.com/capistrano/capistrano).
-- Capistrano tips:
-```
-cap deploy:start (restart|stop)
-cap web:start (restart|stop)
-cap workers:start (restart|stop)
-```
+
+##Run Pirozhki in Docker container:
+- Visit [Pirozhki-docker](https://github.com/ZubKonst/pirozhki-docker)
 
 ##Run Pirozhki locally:
 - Copy all files from `APP/config/variables/sample/` to `APP/config/variables/` and fill with your data.
-- Use [foreman](https://github.com/ddollar/foreman).
-- Or use Docker with [fig](http://fig.sh). [Step-by-step guide](info/fig_notes.md).
-
-##Init database on the server from project path:
+- Init database:
 ```
-[APP_ENV=production] rake db:create
-[APP_ENV=production] rake db:migrate
-[APP_ENV=production] rake db:seed
+[APP_ENV=development] rake db:create
+[APP_ENV=development] rake db:migrate
+[APP_ENV=development] rake db:seed
 ```
-
-##Run console:
+- Use [foreman](https://github.com/ddollar/foreman)
+- Run console:
 ```
-[APP_ENV=production] irb -r ./app.rb
+[APP_ENV=development] irb -r ./app.rb
 ```
 
 ##Useful examples:

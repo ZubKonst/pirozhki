@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
-  pool: 30
   encoding: unicode
+  pool: 30
   host: localhost
   database: pirozhki_development
   username: dbuser
@@ -9,8 +9,8 @@ development:
 
 test:
   adapter: postgresql
-  pool: 30
   encoding: unicode
+  pool: 30
   host: localhost
   database: pirozhki_test
   username: dbuser
@@ -20,7 +20,6 @@ production:
   adapter: postgresql
   pool: 30
   encoding: unicode
-  host: localhost
   database: pirozhki_production
   username: pirozhki
   password: REPLACE_ME

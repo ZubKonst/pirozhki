@@ -1,3 +1,10 @@
+Pirozhki 0.4.0, 2014-12-26
+--------------------------
+- Using travis-ci container-based infrastructure
+- Remove post counters. (Need to rebuild database)
+- Add different logstash inputs support.
+- Move Docker staff to https://github.com/ZubKonst/pirozhki-docker.
+
 Pirozhki 0.3.0, 2014-12-07
 --------------------------
 - Config and run fig.

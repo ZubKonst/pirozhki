@@ -15,35 +15,7 @@ describe PostBuilder do
 
   include_examples 'record builder'
 
-  context 'self.find_or_create_with_counter!' do
-    it 'create post and counter' do
-      post = subject.find_or_create_with_counter!(sample_data)
-      expect(records.count).to eq(1)
-      expect(post.post_counters.count).to eq(1)
-    end
-
-    it 'add counter to existed post' do
-      post = subject.find_or_create_with_counter!(sample_data)
-
-      # new couners
-      sample_data['meta']['request_at'] = Time.now.to_i
-      post = subject.find_or_create_with_counter!(sample_data)
-
-      expect(records.count).to eq(1)
-      expect(post.post_counters.count).to eq(2)
-    end
-
-    it 'not create counter twice' do
-      _post = subject.find_or_create_with_counter!(sample_data)
-      post = subject.find_or_create_with_counter!(sample_data)
-
-      expect(records.count).to eq(1)
-      expect(post.post_counters.count).to eq(1)
-    end
-  end
-
   context 'self.not_existed' do
-
     let(:full_posts_data) do
       response = FakeInstagramResponse.instance
       response.all_with_meta

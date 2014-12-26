@@ -1,5 +1,5 @@
 ---
-:pidfile: tmp/pids/sidekiq.pid
+:pidfile: pids/sidekiq.pid
 :concurrency: 25
 :queues:
   - [request_manager, 1]

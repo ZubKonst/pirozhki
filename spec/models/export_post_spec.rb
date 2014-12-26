@@ -7,7 +7,7 @@ describe Post do
     let(:post) do
       response = FakeInstagramResponse.instance
       @post_data = response.sample_with_meta
-      post = PostBuilder.find_or_create_with_counter!(@post_data)
+      post = PostBuilder.new(@post_data).find_or_create!
       add_geo_point(post)
     end
 

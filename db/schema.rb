@@ -39,15 +39,6 @@ ActiveRecord::Schema.define(version: 1) do
   add_index "locations", ["instagram_id"], name: "index_locations_on_instagram_id", unique: true, where: "(instagram_id IS NOT NULL)", using: :btree
   add_index "locations", ["lat", "lng"], name: "index_locations_on_lat_and_lng", using: :btree
 
-  create_table "post_counters", force: true do |t|
-    t.integer "post_id",        null: false
-    t.integer "likes_count",    null: false
-    t.integer "comments_count", null: false
-    t.integer "created_time",   null: false
-  end
-
-  add_index "post_counters", ["post_id", "created_time"], name: "index_post_counters_on_post_id_and_created_time", unique: true, using: :btree
-
   create_table "posts", force: true do |t|
     t.integer "geo_point_id",   null: false
     t.integer "user_id",        null: false
@@ -60,6 +51,8 @@ ActiveRecord::Schema.define(version: 1) do
     t.text    "instagram_link", null: false
     t.text    "image_link",     null: false
     t.text    "video_link"
+    t.integer "likes_count",    null: false
+    t.integer "comments_count", null: false
     t.text    "caption"
   end
 
