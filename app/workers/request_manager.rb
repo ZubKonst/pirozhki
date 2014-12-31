@@ -5,7 +5,7 @@ class RequestManager
   sidekiq_options queue: :request_manager
 
   # https://github.com/tobiassvn/sidetiq/issues/31
-  recurrence { hourly.minute_of_hour( *(0..59).step(5).to_a ) }
+  recurrence { hourly.minute_of_hour( *(0..59).step(1).to_a ) }
 
   def perform
     geo_points = all_geo_points

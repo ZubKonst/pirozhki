@@ -51,5 +51,5 @@ group :test do
 end
 
 group :help do
-  gem 'pr_geohash'
+  gem 'geokit'
 end

@@ -10,6 +10,8 @@ Pirozhki is a [sidekiq](http://sidekiq.org)-based utility for collecting data fr
 ##Available types of Pirozhki:
 - Pirozhki with instagram and geotags. (GeoPoint table.)
 
+##Useful examples:
+- Real life demo: http://pirozhki.zubkonst.com
 
 ##Run Pirozhki in Docker container:
 - Visit [Pirozhki-docker](https://github.com/ZubKonst/pirozhki-docker)
@@ -22,17 +24,15 @@ Pirozhki is a [sidekiq](http://sidekiq.org)-based utility for collecting data fr
 [APP_ENV=development] rake db:migrate
 [APP_ENV=development] rake db:seed
 ```
-- Use [foreman](https://github.com/ddollar/foreman)
+- Use [foreman](https://github.com/ddollar/foreman) or run manually:
+```
+web: puma app/web_servers/sidekiq.ru
+worker: sidekiq -r ./app.rb -C config/variables/sidekiq.yml
+```
 - Run console:
 ```
 [APP_ENV=development] irb -r ./app.rb
 ```
-
-##Useful examples:
-- Connecting with ELK (Elasticsearch, Logstash and Kibana) stack.
-  - Posts over time ![Images over time](info/images_over_time.png)
-  - Posts on the map ![Images on the map](info/images_on_the_map.png)
-  - Hashtags by popularity ![Hashtags and Places](info/hashtags_by_popularity.png)
 
 ##License:
 Pirozhki is a utility for collecting data from social networks.  
