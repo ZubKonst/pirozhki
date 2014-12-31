@@ -1,3 +1,5 @@
+Pirozhki 0.4.1, 2014-12-30
+--------------------------
 - Add link to http://pirozhki.zubkonst.com to README.
 - Set Toronto as default city.
 
