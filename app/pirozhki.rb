@@ -1,5 +1,7 @@
 dirs = %w[ models record_builders social_clients workers tools ]
 
+current_file_dir = File.dirname __FILE__
 dirs.each do |dir|
-  Dir[File.join(File.dirname(__FILE__), dir, '*.rb')].each { |file| require file }
+  require_dir = File.join current_file_dir , dir, '*.rb'
+  Dir[require_dir].each { |file| require file }
 end

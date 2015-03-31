@@ -4,15 +4,16 @@ describe Post do
 
   context '#export_data' do
 
-    let(:post) do
+    let :post do
       response = FakeInstagramResponse.instance
       @post_data = response.sample_with_meta
-      post = PostBuilder.new(@post_data).find_or_create!
-      add_geo_point(post)
+      post_builder = PostBuilder.new @post_data
+      post = post_builder.find_or_create!
+      add_geo_point post
     end
 
-    def add_geo_point(post)
-      gp = GeoPoint.create!(lat: rand*100, lng: rand*100)
+    def add_geo_point post
+      gp = GeoPoint.create! lat: rand*100, lng: rand*100
       post.update_attributes geo_point: gp
       post
     end
@@ -28,7 +29,7 @@ describe Post do
            filter_id filter_name ]
 
         export_data = post.export_data
-        expect(export_data.keys).to match_array(required_fields)
+        expect(export_data.keys).to match_array required_fields
       end
     end
 
@@ -37,16 +38,16 @@ describe Post do
       it 'has valid counters' do
         export_data = post.export_data
 
-        expect(export_data['post_tags_count']).to eq(@post_data['tags'].count)
-        expect(export_data['post_tagged_users_count']).to eq(@post_data['users_in_photo'].count)
-        expect(export_data['post_likes_count']).to eq(@post_data['likes']['count'])
-        expect(export_data['post_comments_count']).to eq(@post_data['comments']['count'])
+        expect(export_data['post_tags_count']).to eq @post_data['tags'].count
+        expect(export_data['post_tagged_users_count']).to eq @post_data['users_in_photo'].count
+        expect(export_data['post_likes_count']).to eq @post_data['likes']['count']
+        expect(export_data['post_comments_count']).to eq @post_data['comments']['count']
       end
 
       it 'has valid tags' do
         export_data = post.export_data
 
-        expect(export_data['post_tags']).to match_array(@post_data['tags'])
+        expect(export_data['post_tags']).to match_array @post_data['tags']
       end
     end
 

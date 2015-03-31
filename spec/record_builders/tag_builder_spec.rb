@@ -4,12 +4,14 @@ require_relative '../spec_helper'
 describe TagBuilder do
   it_behaves_like 'record builder' do
     subject { TagBuilder }
-    let(:records) { Tag }
-    let(:sample_data) do
+    let :records do
+      Tag
+    end
+    let :sample_data do
       response = FakeInstagramResponse.instance
       response.sample_with_tags['tags'].sample
     end
-    let(:collection_data) do
+    let :collection_data do
       response = FakeInstagramResponse.instance
       response.all_with_tags.flat_map { |t| t['tags'] } .uniq
     end

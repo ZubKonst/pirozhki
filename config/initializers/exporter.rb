@@ -6,8 +6,8 @@ $exporter =
   case export_config['type']
     when /\Alogstash_.+/
       require 'logstash-logger'
-      export_config['type'].slice!('logstash_')
-      LogStashLogger.new(export_config.symbolize_keys)
+      export_config['type'].slice! 'logstash_'
+      LogStashLogger.new export_config.symbolize_keys
     else
-      Logger.new(STDOUT)
+      Logger.new STDOUT
   end

@@ -1,16 +1,17 @@
 require 'set'
-
 require_relative 'base_builder'
 
 class PostBuilder < BaseBuilder
   MODEL = Post
 
   class << self
-    def not_existed(posts_data)
-      instagram_ids = posts_data.map { |t| t['id'] }
-      exists_instagram_ids = Post.where(instagram_id: instagram_ids).pluck(:instagram_id)
+    def not_existed posts_data
+      instagram_ids = posts_data.map { |post_data| post_data['id'] }
+      exists_instagram_ids = Post.pluck_where :instagram_id, instagram_ids
       exists_instagram_ids = exists_instagram_ids.to_set
-      posts_data.select { |t| !exists_instagram_ids.include?(t['id']) }
+      posts_data.select do |post_data|
+        not exists_instagram_ids.include? post_data['id']
+      end
     end
   end
 
@@ -36,20 +37,23 @@ class PostBuilder < BaseBuilder
 
   # Attributes that are dependent on other recordings.
   def records_attrs
+    tag_ids = tags.map &:id
+    tagged_user_ids = users_in_photo.map &:id
     {
       user_id: user.id,
       filter_id: filter.id,
       location_id: location.id,
 
-      tag_ids: tags.map(&:id),
-      tagged_user_ids: users_in_photo.map(&:id)
+      tag_ids: tag_ids,
+      tagged_user_ids: tagged_user_ids
     }
   end
 
   def content_attrs
+    caption = @data['caption'] && @data['caption'][:text]
     {
       content_type: @data['type'],
-      caption: @data['caption'].try(:[], :text),
+      caption: caption,
       instagram_link: @data['link'],
       image_link: image_link,
       video_link: video_link
@@ -70,31 +74,36 @@ class PostBuilder < BaseBuilder
   end
 
   def user
-    UserBuilder.new(@data['user']).find_or_create!
+    user_builder = UserBuilder.new @data['user']
+    user_builder.find_or_create!
   end
 
   def filter
-    FilterBuilder.new(@data['filter']).find_or_create!
+    filter_builder = FilterBuilder.new @data['filter']
+    filter_builder.find_or_create!
   end
 
   def location
-    LocationBuilder.new(@data['location']).find_or_create!
+    location_builder = LocationBuilder.new @data['location']
+    location_builder.find_or_create!
   end
 
   def tags
     @data['tags'].map do |tag|
-      TagBuilder.new(tag).find_or_create!
+      tag_builder = TagBuilder.new tag
+      tag_builder.find_or_create!
     end
   end
 
   def users_in_photo
     @data['users_in_photo'].map do |user_in_photo|
-      UserBuilder.new(user_in_photo['user']).find_or_create!
+      user_builder = UserBuilder.new user_in_photo['user']
+      user_builder.find_or_create!
     end
   end
 
   def image_link
-    biggest_image = @data['images'].values.max_by {|image| image['width']}
+    biggest_image = @data['images'].values.max_by { |image| image['width'] }
     biggest_image['url']
   end
 

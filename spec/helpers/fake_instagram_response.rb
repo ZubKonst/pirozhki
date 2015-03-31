@@ -5,7 +5,7 @@ class FakeInstagramResponse
   extend Forwardable
 
   def initialize
-    @response = YAML.load_file("#{APP_ROOT}/spec/helpers/instagram_response.yml")
+    @response = YAML.load_file "#{APP_ROOT}/spec/helpers/instagram_response.yml"
   end
 
   def_delegators :@response, :sample
@@ -28,20 +28,21 @@ class FakeInstagramResponse
   end
 
   def all_with_meta
-    all.map { |post_data| add_fake_meta(post_data) }
+    all.map { |post_data| add_fake_meta post_data }
   end
 
   def sample_with_meta
     post_data = sample
-    add_fake_meta(post_data)
+    add_fake_meta post_data
   end
 
   private
 
-  def add_fake_meta(post_data)
+  def add_fake_meta post_data
     post_data['meta'] ||= {}
     post_data['meta']['geo_point_id'] = 7 # random number
-    post_data['meta']['request_at']   = Time.now.to_i - (rand*1.week).to_i
+    rand_time = rand * 1.week
+    post_data['meta']['request_at']   = Time.now.to_i - rand_time.to_i
     post_data
   end
 end

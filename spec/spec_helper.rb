@@ -30,11 +30,11 @@ require_relative 'helpers/fake_instagram_response'
 RSpec.configure do |config|
 
   ## DatabaseCleaner ##
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
+  config.before :suite do
+    DatabaseCleaner.clean_with :truncation
     DatabaseCleaner.strategy = :transaction
   end
-  config.around(:each) do |example|
+  config.around :each do |example|
     DatabaseCleaner.cleaning do
       example.run
     end

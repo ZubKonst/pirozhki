@@ -1,3 +1,5 @@
+- Remove optional parentheses.
+
 Pirozhki 0.4.1, 2014-12-30
 --------------------------
 - Add link to http://pirozhki.zubkonst.com to README.

@@ -1,11 +1,13 @@
-def coordinates(sw, ne, n_lat, n_lng)
+def coordinates sw, ne, n_lat, n_lng
   start_lat = sw[:lat]
   end_lat = ne[:lat]
-  period_lat = (end_lat - start_lat)/n_lat
+  diff_lat = end_lat - start_lat
+  period_lat = diff_lat/n_lat
 
   start_lng = sw[:lng]
   end_lng = ne[:lng]
-  period_lng = (end_lng - start_lng)/n_lat
+  diff_lng = end_lng - start_lng
+  period_lng = diff_lng/n_lat
 
   out = []
   (n_lat+1).times.each do |i_lat|
@@ -37,19 +39,19 @@ sw = { lat: 43.57, lng: -79.64 }
 ne = { lat: 43.86, lng: -79.11 }
 
 
-a = Geokit::LatLng.new(sw[:lat],sw[:lng])
-b = Geokit::LatLng.new(ne[:lat],ne[:lng])
-a.distance_to(b) # 33.2km - SW to NE
+a = Geokit::LatLng.new sw[:lat],sw[:lng]
+b = Geokit::LatLng.new ne[:lat],ne[:lng]
+a.distance_to b # 33.2km - SW to NE
 
-a = Geokit::LatLng.new(sw[:lat],sw[:lng])
-b = Geokit::LatLng.new(sw[:lat],ne[:lng])
-a.distance_to(b) # 26.6km - W to E
+a = Geokit::LatLng.new sw[:lat],sw[:lng]
+b = Geokit::LatLng.new sw[:lat],ne[:lng]
+a.distance_to b # 26.6km - W to E
 
-a = Geokit::LatLng.new(sw[:lat],sw[:lng])
-b = Geokit::LatLng.new(ne[:lat],sw[:lng])
-a.distance_to(b) # 20km - N to S
+a = Geokit::LatLng.new sw[:lat],sw[:lng]
+b = Geokit::LatLng.new ne[:lat],sw[:lng]
+a.distance_to b # 20km - N to S
 
-coordinates(sw, ne, 3, 3)
+coordinates sw, ne, 3, 3
 
 [
   {:lat=>43.57, :lng=>-79.64}, {:lat=>43.57, :lng=>-79.46}, {:lat=>43.57, :lng=>-79.29}, {:lat=>43.57, :lng=>-79.11},

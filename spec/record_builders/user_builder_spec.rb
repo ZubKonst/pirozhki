@@ -4,12 +4,14 @@ require_relative '../spec_helper'
 describe UserBuilder do
   it_behaves_like 'record builder' do
     subject { UserBuilder }
-    let(:records) { User }
-    let(:sample_data) do
+    let :records do
+      User
+    end
+    let :sample_data do
       response = FakeInstagramResponse.instance
       response.sample['user']
     end
-    let(:collection_data) do
+    let :collection_data do
       response = FakeInstagramResponse.instance
       response.all.map { |t| t['user'] }
     end

@@ -1,21 +1,24 @@
 require 'yaml'
 
 module Sidekiq
-  def self.load_json(string)
-    Oj.load(string)
+  def self.load_json string
+    Oj.load string
   rescue
-    JSON.parse(string)
+    JSON.parse string
   end
 
-  def self.dump_json(object)
-    Oj.dump(object, mode: :compat)
+  def self.dump_json object
+    Oj.dump object, mode: :compat
   rescue
-    JSON.generate(object)
+    JSON.generate object
   end
 end
 
-redis_config = YAML.load_file("#{APP_ROOT}/config/variables/redis.yml")[APP_ENV]
-raise "Empty redis_config for #{APP_ENV}" unless redis_config
+redis_configs = YAML.load_file "#{APP_ROOT}/config/variables/redis.yml"
+redis_config  = redis_configs[APP_ENV]
+unless redis_config
+  raise "Empty redis_config for #{APP_ENV}"
+end
 
 Sidekiq.default_worker_options = { 'backtrace' => true }
 
