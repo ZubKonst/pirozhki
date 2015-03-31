@@ -7,8 +7,7 @@ describe Post do
     let :post do
       response = FakeInstagramResponse.instance
       @post_data = response.sample_with_meta
-      post_builder = PostBuilder.new @post_data
-      post = post_builder.find_or_create!
+      post = PostBuilder.find_or_create! @post_data
       add_geo_point post
     end
 

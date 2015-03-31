@@ -2,8 +2,13 @@ require 'set'
 
 class BaseBuilder
 
-  def initialize post_data
-    @data = post_data
+  def self.find_or_create! data
+    builder = new data
+    builder.find_or_create!
+  end
+
+  def initialize data
+    @data = data
   end
 
   def find_or_create!

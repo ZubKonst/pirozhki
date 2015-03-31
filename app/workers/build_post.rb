@@ -9,8 +9,7 @@ class BuildPost
   end
 
   def build_post post_data
-    post_builder = PostBuilder.new post_data
-    post_builder.find_or_create!
+    PostBuilder.find_or_create! post_data
   end
 
   def enqueue_export post

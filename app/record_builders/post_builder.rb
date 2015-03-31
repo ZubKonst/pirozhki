@@ -43,7 +43,6 @@ class PostBuilder < BaseBuilder
       user_id: user.id,
       filter_id: filter.id,
       location_id: location.id,
-
       tag_ids: tag_ids,
       tagged_user_ids: tagged_user_ids
     }
@@ -74,31 +73,26 @@ class PostBuilder < BaseBuilder
   end
 
   def user
-    user_builder = UserBuilder.new @data['user']
-    user_builder.find_or_create!
+    UserBuilder.find_or_create! @data['user']
   end
 
   def filter
-    filter_builder = FilterBuilder.new @data['filter']
-    filter_builder.find_or_create!
+    FilterBuilder.find_or_create! @data['filter']
   end
 
   def location
-    location_builder = LocationBuilder.new @data['location']
-    location_builder.find_or_create!
+    LocationBuilder.find_or_create! @data['location']
   end
 
   def tags
     @data['tags'].map do |tag|
-      tag_builder = TagBuilder.new tag
-      tag_builder.find_or_create!
+      TagBuilder.find_or_create! tag
     end
   end
 
   def users_in_photo
     @data['users_in_photo'].map do |user_in_photo|
-      user_builder = UserBuilder.new user_in_photo['user']
-      user_builder.find_or_create!
+      UserBuilder.find_or_create! user_in_photo['user']
     end
   end
 

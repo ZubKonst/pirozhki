@@ -32,8 +32,7 @@ describe PostBuilder do
     it 'select not created posts_data' do
       created_posts, not_created_posts = randomly_split full_posts_data
       created_posts.each do |post_data|
-        post_builder = PostBuilder.new post_data
-        post_builder.find_or_create!
+        PostBuilder.find_or_create! post_data
       end
       expect(PostBuilder.not_existed full_posts_data).to eq not_created_posts
     end
