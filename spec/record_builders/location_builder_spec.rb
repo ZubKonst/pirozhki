@@ -3,10 +3,6 @@ require_relative '../spec_helper'
 
 describe LocationBuilder do
   it_behaves_like 'record builder' do
-    subject { LocationBuilder }
-    let :records do
-      Location
-    end
     let :sample_data do
       response = FakeInstagramResponse.instance
       response.sample_with_named_location['location']

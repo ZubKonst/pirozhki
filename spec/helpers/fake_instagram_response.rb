@@ -42,7 +42,7 @@ class FakeInstagramResponse
     post_data['meta'] ||= {}
     post_data['meta']['geo_point_id'] = 7 # random number
     rand_time = rand * 1.week
-    post_data['meta']['request_at']   = Time.now.to_i - rand_time.to_i
+    post_data['meta']['request_at'] = Time.now.to_i - rand_time.to_i
     post_data
   end
 end

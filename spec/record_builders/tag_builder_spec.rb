@@ -3,10 +3,6 @@ require_relative '../spec_helper'
 
 describe TagBuilder do
   it_behaves_like 'record builder' do
-    subject { TagBuilder }
-    let :records do
-      Tag
-    end
     let :sample_data do
       response = FakeInstagramResponse.instance
       response.sample_with_tags['tags'].sample

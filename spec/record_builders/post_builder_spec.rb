@@ -2,10 +2,6 @@ require_relative 'record_builder_behavior'
 require_relative '../spec_helper'
 
 describe PostBuilder do
-  subject { PostBuilder }
-  let :records do
-    Post
-  end
   let :sample_data do
     response = FakeInstagramResponse.instance
     response.sample_with_meta
@@ -17,7 +13,7 @@ describe PostBuilder do
 
   include_examples 'record builder'
 
-  context 'self.not_existed' do
+  context '.not_existed' do
     let :full_posts_data do
       response = FakeInstagramResponse.instance
       response.all_with_meta

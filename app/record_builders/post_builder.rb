@@ -37,15 +37,26 @@ class PostBuilder < BaseBuilder
 
   # Attributes that are dependent on other recordings.
   def records_attrs
-    tag_ids = tags.map &:id
-    tagged_user_ids = users_in_photo.map &:id
-    {
-      user_id: user.id,
-      filter_id: filter.id,
-      location_id: location.id,
-      tag_ids: tag_ids,
-      tagged_user_ids: tagged_user_ids
+    user     = UserBuilder.find_or_create!     @data['user']
+    filter   = FilterBuilder.find_or_create!   @data['filter']
+    location = LocationBuilder.find_or_create! @data['location']
+    tags =
+      @data['tags'].map do |tag|
+        TagBuilder.find_or_create! tag
+      end
+    users_in_photo =
+      @data['users_in_photo'].map do |user_in_photo|
+        UserBuilder.find_or_create! user_in_photo['user']
+      end
+
+    data = {
+      user_id:     user.id,
+      filter_id:   filter.id,
+      location_id: location.id
     }
+    data[:tag_ids] = tags.map &:id
+    data[:tagged_user_ids] = users_in_photo.map &:id
+    data
   end
 
   def content_attrs
@@ -70,30 +81,6 @@ class PostBuilder < BaseBuilder
     {
       created_time: @data['created_time'].to_i
     }
-  end
-
-  def user
-    UserBuilder.find_or_create! @data['user']
-  end
-
-  def filter
-    FilterBuilder.find_or_create! @data['filter']
-  end
-
-  def location
-    LocationBuilder.find_or_create! @data['location']
-  end
-
-  def tags
-    @data['tags'].map do |tag|
-      TagBuilder.find_or_create! tag
-    end
-  end
-
-  def users_in_photo
-    @data['users_in_photo'].map do |user_in_photo|
-      UserBuilder.find_or_create! user_in_photo['user']
-    end
   end
 
   def image_link

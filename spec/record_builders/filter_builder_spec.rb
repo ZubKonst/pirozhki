@@ -3,10 +3,6 @@ require_relative '../spec_helper'
 
 describe FilterBuilder do
   it_behaves_like 'record builder' do
-    subject { FilterBuilder }
-    let :records do
-      Filter
-    end
     let :sample_data do
       response = FakeInstagramResponse.instance
       response.sample['filter']
