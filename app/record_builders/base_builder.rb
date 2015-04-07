@@ -12,23 +12,15 @@ class BaseBuilder
   end
 
   def find_or_create!
-    find || create!
+    model.find_by uniq_attrs or model.create! attrs
   rescue ActiveRecord::RecordNotUnique
-    find
+    model.find_by uniq_attrs
   end
 
   private
 
   def model
     self.class::MODEL
-  end
-
-  def find
-    model.find_by uniq_attrs
-  end
-
-  def create!
-    model.create! attrs
   end
 
   def uniq_attrs
