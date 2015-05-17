@@ -10,22 +10,21 @@ def coordinates sw, ne, n_lat, n_lng
   period_lng = diff_lng/n_lat
 
   out = []
-  (n_lat+1).times.each do |i_lat|
-    (n_lng+1).times.each do |i_lng|
+  n_lat.times.each do |i_lat|
+    n_lng.times.each do |i_lng|
       current_lat = start_lat + i_lat * period_lat
       current_lng = start_lng + i_lng * period_lng
       out << { lat: current_lat, lng: current_lng }
-    end
-  end
 
-  n_lat.times.each do |i_lat|
-    n_lng.times.each do |i_lng|
       current_lat = start_lat + i_lat * period_lat + period_lat/2
       current_lng = start_lng + i_lng * period_lng + period_lng/2
       out << { lat: current_lat, lng: current_lng }
     end
   end
 
+  current_lat = start_lat + n_lat * period_lat + period_lat
+  current_lng = start_lng + n_lng * period_lng + period_lng
+  out << { lat: current_lat, lng: current_lng }
   out
 end
 

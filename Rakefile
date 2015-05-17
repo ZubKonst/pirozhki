@@ -1,8 +1,19 @@
 require 'yaml'
 
 require_relative 'config/initializers/env'
-require_relative 'lib/seeder'
 
+## Test tasks ##
+require 'rake'
+require 'rake/testtask'
+Rake::TestTask.new do |t|
+  t.test_files = Dir.glob 'test/**/test_*.rb'
+end
+task :default => :test
+##############
+
+
+## DB tasks ##
+require_relative 'lib/seeder'
 require 'active_record_migrations'
 ActiveRecordMigrations.configure do |c|
   c.database_configuration = YAML.load_file "#{APP_ROOT}/config/variables/database.yml"
@@ -14,10 +25,3 @@ ActiveRecordMigrations.configure do |c|
   c.seed_loader = Seeder.new "#{APP_ROOT}/db/seed.rb"
 end
 ActiveRecordMigrations.load_tasks
-
-begin
-  require 'rspec/core/rake_task'
-  RSpec::Core::RakeTask.new :spec
-  task :default => :spec
-rescue LoadError
-end

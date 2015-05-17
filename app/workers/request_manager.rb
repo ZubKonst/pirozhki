@@ -19,7 +19,7 @@ class RequestManager
   end
 
   def all_geo_points
-    GeoPoint.order 'RANDOM()' # Slow but works
+    GeoPoint.all.shuffle # Slow but works
   end
 
   def init_load geo_point_id

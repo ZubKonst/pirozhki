@@ -14,7 +14,7 @@ class BaseBuilder
   def find_or_create!
     model.find_by uniq_attrs or model.create! attrs
   rescue ActiveRecord::RecordNotUnique
-    model.find_by uniq_attrs
+    model.find_by! uniq_attrs
   end
 
   private
@@ -32,6 +32,6 @@ class BaseBuilder
     out
   end
 
-  def attrs ;     raise 'This method should be overridden.' end
-  def uniq_keys ; raise 'This method should be overridden.' end
+  def attrs ;     raise 'This method must be overridden.' end
+  def uniq_keys ; raise 'This method must be overridden.' end
 end
