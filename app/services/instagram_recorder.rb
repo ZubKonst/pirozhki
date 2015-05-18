@@ -24,13 +24,14 @@ class InstagramRecorder
   end
 
   def create
-    data = {}
-    data['user_id']         = create_user.id
-    data['tag_ids']         = create_tags.map &:id
-    data['filter_id']       = create_filter.id
-    data['location_id']     = create_location.id
-    data['tagged_user_ids'] = create_users_in_photo.map &:id
-    create_post data
+    records_info = {
+      'user_id'     => create_user.id,
+      'filter_id'   => create_filter.id,
+      'location_id' => create_location.id,
+    }
+    records_info['tag_ids']         = create_tags.map &:id
+    records_info['tagged_user_ids'] = create_users_in_photo.map &:id
+    create_post records_info
   end
 
   private

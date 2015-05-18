@@ -21,15 +21,18 @@ class TestPostBuilder < Minitest::Test
 
   def add_fake_records_info post_data
     post_data['meta'] ||= {}
-    post_data['meta']['records'] =
-      {
-        'user_id'     => rand(100),
-        'tag_ids'     => [],
-        'filter_id'   => rand(100),
-        'location_id' => rand(100),
-        'tagged_user_ids' => [],
-      }
+    post_data['meta']['records'] = fake_records_info
     post_data
+  end
+
+  def fake_records_info
+    data = {}
+    data['user_id']         = rand 100
+    data['tag_ids']         = []
+    data['filter_id']       = rand 100
+    data['location_id']     = rand 100
+    data['tagged_user_ids'] = []
+    data
   end
 
 end

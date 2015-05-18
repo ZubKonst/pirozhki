@@ -1,7 +1,7 @@
 class LoadByGeoPoint
   include Sidekiq::Worker
 
-  # The job will be unique for the number of seconds configured (default 30 minutes) or until the job has been completed.
+  # The job will be unique for the number of seconds configured [default 30 minutes] or until the job has been completed.
   sidekiq_options queue: :load_by_geo_point,
                   unique: true,
                   throttle: { threshold: 80, period: 1.minute.to_i, key: 'instagram_api_request' }
