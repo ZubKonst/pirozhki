@@ -12,6 +12,7 @@ if ENV['COVERAGE'] || ENV['TRAVIS']
   SimpleCov.start do
     add_group 'Models', 'app/models'
     add_group 'RecordBuilders', 'app/record_builders'
+    add_group 'Services', 'app/services'
     add_group 'SocialClients', 'app/social_clients'
     add_group 'Workers', 'app/workers'
 

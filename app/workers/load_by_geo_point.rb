@@ -40,7 +40,7 @@ class LoadByGeoPoint
 
 
   def enqueue_posts_data posts, geo_point, request_at
-    not_existed_posts = PostBuilder.not_existed posts
+    not_existed_posts = InstagramRecorder.not_in_database posts
     not_existed_posts.each do |post_data|
       add_meta_data! post_data, geo_point, request_at
       build_post post_data

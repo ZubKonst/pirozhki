@@ -8,7 +8,7 @@ class TestPost < Minitest::Test
     geo_point = GeoPoint.create! lat: rand*100, lng: rand*100
     instagram_response = FakeInstagramResponse.new geo_point.id
     @post_data = instagram_response.sample_with_meta
-    @post = PostBuilder.find_or_create! @post_data
+    @post = InstagramRecorder.create_from_hash @post_data
   end
 
   def teardown
@@ -32,11 +32,11 @@ class TestPost < Minitest::Test
   ## Content validation ##
   def test_export_data_counters
     expected_counters = {
-      post_tags_count: @post_data['tags'].count,
-      post_tagged_users_count: @post_data['users_in_photo'].count,
-      post_likes_count: @post_data['likes']['count'],
-      post_comments_count: @post_data['comments']['count']
-    }.stringify_keys
+      'post_tags_count'         => @post_data['tags'].count,
+      'post_likes_count'        => @post_data['likes']['count'],
+      'post_comments_count'     => @post_data['comments']['count'],
+      'post_tagged_users_count' => @post_data['users_in_photo'].count,
+    }
 
     export_data = @post.export_data
     expected_counters.each do |counter, value|

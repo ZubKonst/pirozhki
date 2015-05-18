@@ -9,7 +9,7 @@ class BuildPost
   end
 
   def build_post post_data
-    PostBuilder.find_or_create! post_data
+    InstagramRecorder.create_from_hash post_data
   end
 
   def enqueue_export post
