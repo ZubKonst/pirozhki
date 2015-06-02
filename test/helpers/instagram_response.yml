@@ -554,7 +554,7 @@
     created_time: '1408134828'
     text: |-
       Проводили трудодень"тяпницу" !
-      Ай как куснааааа)))
+      Ай как куснааааа
     from:
       username: madamello
       profile_picture: http://photos-g.ak.instagram.com/hphotos-ak-xfp1/10413990_234787316715974_51114045_a.jpg
@@ -1497,7 +1497,7 @@
         username: s2pak
         profile_picture: http://images.ak.instagram.com/profiles/profile_182936343_75sq_1390886564.jpg
         id: '182936343'
-        full_name: Anna  Levchuk (Stupak)
+        full_name: Anna  Levchuk [Stupak]
       id: '787784850353314682'
     - created_time: '1408131432'
       text: "@s2pak выложила)"
@@ -1528,7 +1528,7 @@
     - username: s2pak
       profile_picture: http://images.ak.instagram.com/profiles/profile_182936343_75sq_1390886564.jpg
       id: '182936343'
-      full_name: Anna  Levchuk (Stupak)
+      full_name: Anna  Levchuk [Stupak]
   images:
     low_resolution:
       url: http://scontent-b.cdninstagram.com/hphotos-xfa1/t51.2885-15/10584584_1464379617151877_1342411066_a.jpg

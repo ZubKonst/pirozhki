@@ -1,18 +1,7 @@
-require 'set'
-
 require_relative 'base_builder'
 
 class PostBuilder < BaseBuilder
   MODEL = Post
-
-  class << self
-    def not_existed(posts_data)
-      instagram_ids = posts_data.map { |t| t['id'] }
-      exists_instagram_ids = Post.where(instagram_id: instagram_ids).pluck(:instagram_id)
-      exists_instagram_ids = exists_instagram_ids.to_set
-      posts_data.select { |t| !exists_instagram_ids.include?(t['id']) }
-    end
-  end
 
   def attrs
     base_attrs =
@@ -36,20 +25,21 @@ class PostBuilder < BaseBuilder
 
   # Attributes that are dependent on other recordings.
   def records_attrs
+    records_info = @data['meta']['records']
     {
-      user_id: user.id,
-      filter_id: filter.id,
-      location_id: location.id,
-
-      tag_ids: tags.map(&:id),
-      tagged_user_ids: users_in_photo.map(&:id)
+      user_id:     records_info['user_id'],
+      tag_ids:     records_info['tag_ids'],
+      filter_id:   records_info['filter_id'],
+      location_id: records_info['location_id'],
+      tagged_user_ids: records_info['tagged_user_ids'],
     }
   end
 
   def content_attrs
+    caption = @data['caption'] && @data['caption'][:text]
     {
       content_type: @data['type'],
-      caption: @data['caption'].try(:[], :text),
+      caption: caption,
       instagram_link: @data['link'],
       image_link: image_link,
       video_link: video_link
@@ -69,38 +59,16 @@ class PostBuilder < BaseBuilder
     }
   end
 
-  def user
-    UserBuilder.new(@data['user']).find_or_create!
-  end
-
-  def filter
-    FilterBuilder.new(@data['filter']).find_or_create!
-  end
-
-  def location
-    LocationBuilder.new(@data['location']).find_or_create!
-  end
-
-  def tags
-    @data['tags'].map do |tag|
-      TagBuilder.new(tag).find_or_create!
-    end
-  end
-
-  def users_in_photo
-    @data['users_in_photo'].map do |user_in_photo|
-      UserBuilder.new(user_in_photo['user']).find_or_create!
-    end
-  end
-
   def image_link
-    biggest_image = @data['images'].values.max_by {|image| image['width']}
+    images = @data['images'].values
+    biggest_image = images.max_by { |image| image['width'] }
     biggest_image['url']
   end
 
   def video_link
     if @data['videos']
-      biggest_video = @data['videos'].values.max_by {|image| image['width']}
+      videos = @data['videos'].values
+      biggest_video = videos.max_by {|image| image['width']}
       biggest_video['url']
     end
   end

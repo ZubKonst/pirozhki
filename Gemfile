@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # rails parts
-gem 'activerecord',  '4.2.0', require: 'active_record'
-gem 'activesupport', '4.2.0',
+gem 'activerecord',  '4.2.1', require: 'active_record'
+gem 'activesupport', '4.2.1',
     require: %w[ active_support/core_ext/numeric/time active_support/concern ]
 
 # databases
@@ -42,12 +42,10 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
+  gem 'minitest'
   gem 'database_cleaner'
   gem 'simplecov', require: false
   gem 'coveralls', require: false
-  gem 'mutant', require: false
-  gem 'mutant-rspec', require: false
 end
 
 group :help do

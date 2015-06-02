@@ -7,8 +7,8 @@ require 'sidetiq/web'
 map '/' do
   if Settings.web.username && Settings.web.password
     use Rack::Auth::Basic, 'Protected Area' do |username, password|
-      (username == Settings.web.username.to_s) &&
-      (password == Settings.web.password.to_s)
+      username == Settings.web.username.to_s &&
+      password == Settings.web.password.to_s
     end
   end
 
