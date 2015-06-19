@@ -1,3 +1,5 @@
+- Update gems (including activesupport security fixes)
+
 Pirozhki 0.4.2, 2015-06-01
 --------------------------
 - Change test framework (rspec to minitest).
