@@ -3,8 +3,9 @@ require 'yaml'
 class FakeInstagramResponse
   extend Forwardable
 
-  def initialize geo_point_id=nil
-    @geo_point_id = geo_point_id || fake_geo_point_id
+  def initialize source_id = fake_source_id, source_type = 'GeoPoint'
+    @source_id   = source_id
+    @source_type = source_type
     @response = YAML.load_file "#{APP_ROOT}/test/helpers/instagram_response.yml"
   end
 
@@ -34,13 +35,14 @@ class FakeInstagramResponse
 
   private
 
-  def fake_geo_point_id
+  def fake_source_id
     rand 777
   end
 
   def add_fake_meta post_data
     post_data['meta'] ||= {}
-    post_data['meta']['geo_point_id'] = @geo_point_id
+    post_data['meta']['source_id']   = @source_id
+    post_data['meta']['source_type'] = @source_type
     rand_time = rand * 1.week
     post_data['meta']['request_at'] = Time.now.to_i - rand_time.to_i
     post_data

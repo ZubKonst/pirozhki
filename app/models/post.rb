@@ -4,7 +4,8 @@ require_relative 'concerns/timestampable'
 class Post < ActiveRecord::Base
   include Timestampable
 
-  belongs_to :geo_point
+  belongs_to :source, polymorphic: true
+
   belongs_to :user
   belongs_to :filter
   belongs_to :location
@@ -23,7 +24,7 @@ class Post < ActiveRecord::Base
   end
 
   def export_data
-    data_sources = [self, user, geo_point, location, filter]
+    data_sources = [self, user, location, filter]
     data_sources.each_with_object Hash.new do |data_source, export_hash|
       data_attrs = data_source.export_attrs
       export_hash.merge! data_attrs
@@ -31,8 +32,8 @@ class Post < ActiveRecord::Base
   end
 
   include Exportable # add :export_attrs method
-  add_export prefix: 'post',
-             export_fields: %i[ id instagram_id created_time content_type caption likes_count comments_count ],
+  add_export prefix: nil,
+             export_fields: %i[ id instagram_id source_id source_type created_time content_type caption likes_count comments_count ],
              extra_fields: :extra_export
 
   def extra_export

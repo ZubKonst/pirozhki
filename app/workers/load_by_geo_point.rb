@@ -49,8 +49,9 @@ class LoadByGeoPoint
 
   def add_meta_data! post_data, geo_point, request_at
     post_data['meta'] ||= {}
-    post_data['meta']['geo_point_id'] = geo_point.id
-    post_data['meta']['request_at']   = request_at # To make jobs idempotent
+    post_data['meta']['source_id']   = geo_point.id
+    post_data['meta']['source_type'] = 'GeoPoint'
+    post_data['meta']['request_at']  = request_at # To make jobs idempotent
     post_data
   end
 

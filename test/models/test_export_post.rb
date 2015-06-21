@@ -18,10 +18,10 @@ class TestPost < Minitest::Test
   ## Structure validation ##
   def test_export_data_structure
     required_fields =
-      %w[ post_id post_instagram_id post_created_time post_content_type post_caption
-           post_tags post_tags_count post_tagged_users_count post_likes_count post_comments_count
+      %w[ id instagram_id created_time content_type caption
+           tags tags_count tagged_users_count likes_count comments_count
            user_id user_instagram_id user_nick_name
-           geo_point_id geo_point_long_lat
+           source_id source_type
            location_id location_instagram_id location_name location_long_lat
            filter_id filter_name ]
 
@@ -32,10 +32,10 @@ class TestPost < Minitest::Test
   ## Content validation ##
   def test_export_data_counters
     expected_counters = {
-      'post_tags_count'         => @post_data['tags'].count,
-      'post_likes_count'        => @post_data['likes']['count'],
-      'post_comments_count'     => @post_data['comments']['count'],
-      'post_tagged_users_count' => @post_data['users_in_photo'].count,
+      'tags_count'         => @post_data['tags'].count,
+      'likes_count'        => @post_data['likes']['count'],
+      'comments_count'     => @post_data['comments']['count'],
+      'tagged_users_count' => @post_data['users_in_photo'].count,
     }
 
     export_data = @post.export_data
@@ -46,6 +46,6 @@ class TestPost < Minitest::Test
 
   def test_export_data_tags
     export_data = @post.export_data
-    assert_equal @post_data['tags'].sort, export_data['post_tags'].sort
+    assert_equal @post_data['tags'].sort, export_data['tags'].sort
   end
 end
