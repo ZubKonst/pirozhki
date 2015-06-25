@@ -5,8 +5,8 @@ class TestInstagramRecorder < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    geo_point = GeoPoint.create! lat: rand*100, lng: rand*100
-    instagram_response = FakeInstagramResponse.new geo_point.id
+    @source = GeoPoint.create! lat: rand*100, lng: rand*100
+    instagram_response = FakeInstagramResponse.new @source.type_as_source, @source.id
     @collection_data = instagram_response.all_with_meta
     @sample_data = instagram_response.sample_with_meta
   end
@@ -46,7 +46,7 @@ class TestInstagramRecorder < Minitest::Test
       InstagramRecorder.create_from_hash post_data
     end
 
-    not_created_posts = InstagramRecorder.not_in_database @collection_data
+    not_created_posts = InstagramRecorder.not_in_database @source, @collection_data
     not_created_posts_ids = not_created_posts.map { |post_data| post_data['id'] }
     posts_to_skip_ids = posts_to_skip.map { |post_data| post_data['id'] }
     assert_equal posts_to_skip_ids.sort, not_created_posts_ids.sort

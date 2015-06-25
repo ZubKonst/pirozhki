@@ -3,7 +3,7 @@ require 'yaml'
 class FakeInstagramResponse
   extend Forwardable
 
-  def initialize source_id = fake_source_id, source_type = 'GeoPoint'
+  def initialize source_type = 'GeoPoint', source_id = fake_source_id
     @source_id   = source_id
     @source_type = source_type
     @response = YAML.load_file "#{APP_ROOT}/test/helpers/instagram_response.yml"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2) do
+ActiveRecord::Schema.define(version: 3) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,10 @@ ActiveRecord::Schema.define(version: 2) do
   end
 
   add_index "geo_points", ["lat", "lng"], name: "index_geo_points_on_lat_and_lng", unique: true, using: :btree
+
+  create_table "hashtags", force: :cascade do |t|
+    t.text "tag_name", null: false
+  end
 
   create_table "locations", force: :cascade do |t|
     t.float   "lat",          null: false

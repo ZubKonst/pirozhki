@@ -5,8 +5,8 @@ class TestPost < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    geo_point = GeoPoint.create! lat: rand*100, lng: rand*100
-    instagram_response = FakeInstagramResponse.new geo_point.id
+    source = GeoPoint.create! lat: rand*100, lng: rand*100
+    instagram_response = FakeInstagramResponse.new source.type_as_source, source.id
     @post_data = instagram_response.sample_with_meta
     @post = InstagramRecorder.create_from_hash @post_data
   end
@@ -31,17 +31,11 @@ class TestPost < Minitest::Test
 
   ## Content validation ##
   def test_export_data_counters
-    expected_counters = {
-      'tags_count'         => @post_data['tags'].count,
-      'likes_count'        => @post_data['likes']['count'],
-      'comments_count'     => @post_data['comments']['count'],
-      'tagged_users_count' => @post_data['users_in_photo'].count,
-    }
-
     export_data = @post.export_data
-    expected_counters.each do |counter, value|
-      assert_equal value, export_data[counter]
-    end
+    assert_equal @post_data['tags'].count,           export_data['tags_count']
+    assert_equal @post_data['likes']['count'],       export_data['likes_count']
+    assert_equal @post_data['comments']['count'],    export_data['comments_count']
+    assert_equal @post_data['users_in_photo'].count, export_data['tagged_users_count']
   end
 
   def test_export_data_tags

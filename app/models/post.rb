@@ -12,6 +12,7 @@ class Post < ActiveRecord::Base
 
   has_many :posts_tags, dependent: :destroy
   has_many :tags, through: :posts_tags
+  def tags_names ; tags.pluck :name end
 
   has_many :users_in_posts, dependent: :destroy
   has_many :tagged_users, through: :users_in_posts, source: :user
@@ -19,7 +20,7 @@ class Post < ActiveRecord::Base
   enum content_type: { image: 0, video: 1 }
 
   def self.pluck_where key, value
-    posts = self.where key => value
+    posts = where key => value
     posts.pluck key
   end
 
@@ -31,15 +32,14 @@ class Post < ActiveRecord::Base
     end
   end
 
-  include Exportable # add :export_attrs method
+  include Exportable
   add_export prefix: nil,
              export_fields: %i[ id instagram_id source_id source_type created_time content_type caption likes_count comments_count ],
              extra_fields: :extra_export
 
   def extra_export
-    tags_list = tags.pluck :name
     {
-      'tags'               => tags_list,
+      'tags'               => tags_names,
       'tags_count'         => tags.count,
       'tagged_users_count' => tagged_users.count
     }
