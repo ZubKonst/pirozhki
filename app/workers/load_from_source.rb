@@ -8,33 +8,9 @@ class LoadFromSource
 
 
   def perform source_type, source_id
-    source = find_source source_type, source_id
+    source = Source.find_source source_type, source_id
     loader = InstagramLoader.new source
-    posts  = loader.get_posts
-    posts  = select_new_posts source, posts
-    posts  = select_with_location posts
-    posts.each { |post| build_post post }
-  end
-
-  def find_source source_type, source_id
-    source_class =
-      case source_type
-        when 'GeoPoint' then GeoPoint
-        when 'Hashtag'  then Hashtag
-        else raise "Unknown source type #{source_type}"
-      end
-    source_class.find source_id
-  end
-
-  def select_new_posts source, posts
-    InstagramRecorder.not_in_database source, posts
-  end
-
-  def select_with_location posts
-    InstagramRecorder.select_with_location posts
-  end
-
-  def build_post post_data
-    BuildPost.perform_async post_data.to_hash
+    posts  = loader.get_posts only_not_persisted: true, only_with_location: true
+    posts.each { |post| BuildPost.perform_async post.to_hash }
   end
 end

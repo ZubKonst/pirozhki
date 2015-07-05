@@ -1,5 +1,5 @@
 require_relative '../test_helper'
-require_relative '../helpers/fake_instagram_response'
+require_relative '../helpers/fake_instagram_loader'
 require_relative 'test_base_builder'
 
 class TestFilterBuilder < Minitest::Test
@@ -8,7 +8,8 @@ class TestFilterBuilder < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    @collection_data = FakeInstagramResponse.new.all.map { |t| t['filter'] }
+    posts = FakeInstagramLoader.new.get_posts
+    @collection_data = posts.map { |t| t['filter'] }
     @sample_data = @collection_data.sample
   end
 

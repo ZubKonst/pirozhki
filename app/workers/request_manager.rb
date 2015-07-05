@@ -11,21 +11,10 @@ class RequestManager
     hourly.minute_of_hour *minutes_list
   end
 
-
   def perform
-    sources = all_sources
-    sources.each { |source| init_load source }
-  end
-
-  private
-
-  def all_sources
-    sources = GeoPoint.all + Hashtag.all
-    sources.shuffle # Slow but works
-  end
-
-  def init_load source
-    LoadFromSource.perform_async source.type_as_source, source.id
+    Source.all_sources.each do |source|
+      LoadFromSource.perform_async source.type_as_source, source.id
+    end
   end
 end
 

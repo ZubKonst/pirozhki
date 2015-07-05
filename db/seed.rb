@@ -18,16 +18,16 @@ hashtags = [
 ]
 
 p 'Before seeding:'
-p "#{GeoPoint.count} geo_points,"
-p "#{Hashtag.count} hashtags."
+p "#{Source::GeoPoint.count} geo_points,"
+p "#{Source::Hashtag.count} hashtags."
 
 coordinates.each do |coordinate|
-  GeoPoint.find_or_create_by! coordinate
+  Source::GeoPoint.find_or_create_by! coordinate
 end
 hashtags.each do |hashtag|
-  Hashtag.find_or_create_by! hashtag
+  Source::Hashtag.find_or_create_by! hashtag
 end
 
 p 'After seeding:'
-p "#{GeoPoint.count} geo_points,"
-p "#{Hashtag.count} hashtags."
+p "#{Source::GeoPoint.count} geo_points,"
+p "#{Source::Hashtag.count} hashtags."

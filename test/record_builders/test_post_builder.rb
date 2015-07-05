@@ -1,5 +1,5 @@
 require_relative '../test_helper'
-require_relative '../helpers/fake_instagram_response'
+require_relative '../helpers/fake_instagram_loader'
 require_relative 'test_base_builder'
 
 class TestPostBuilder < Minitest::Test
@@ -8,8 +8,8 @@ class TestPostBuilder < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    @collection_data = FakeInstagramResponse.new.all_with_meta
-    @collection_data.each { |post_data| add_fake_records_info post_data }
+    posts = FakeInstagramLoader.new.get_posts
+    @collection_data = posts.to_a.each { |post_data| add_fake_records_info post_data }
     @sample_data = @collection_data.sample
   end
 
@@ -20,8 +20,7 @@ class TestPostBuilder < Minitest::Test
   private
 
   def add_fake_records_info post_data
-    post_data['meta'] ||= {}
-    post_data['meta']['records'] = fake_records_info
+    post_data['related_records'] = fake_records_info
     post_data
   end
 

@@ -17,14 +17,14 @@ class PostBuilder < BaseBuilder
   def uniq_attrs
     {
       instagram_id: @data['id'],
-      source_id:   @data['meta']['source_id'],
-      source_type: @data['meta']['source_type']
+      source_id:   @data['source']['id'],
+      source_type: @data['source']['type']
     }
   end
 
   # Attributes that are dependent on other recordings.
   def records_attrs
-    records_info = @data['meta']['records']
+    records_info = @data['related_records']
     {
       user_id:     records_info['user_id'],
       tag_ids:     records_info['tag_ids'],

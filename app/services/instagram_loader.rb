@@ -4,20 +4,14 @@ class InstagramLoader
     @source = source
   end
 
-  def get_posts
-    request_at = Time.now.to_i # To make BuildPost jobs idempotent
-    posts = load_posts
-    posts.each do |post|
-      add_meta_data! post, request_at
-    end
-    posts
+  def get_posts only_not_persisted: true, only_with_location: false
+    raw_posts = @source.load_posts request_params
+    raw_posts = raw_posts.select_with_location if only_with_location
+    raw_posts = raw_posts.select_new_posts     if only_not_persisted
+    raw_posts
   end
 
   private
-
-  def load_posts
-    @source.load_posts request_params
-  end
 
   def request_params
     params = {}
@@ -32,15 +26,4 @@ class InstagramLoader
     return if delay == 0
     Time.now.to_i - delay
   end
-
-  def add_meta_data! post_data, request_at
-    post_data['meta'] ||= {}
-    post_data['meta'].tap do |meta|
-      meta['source_id']   = @source.id
-      meta['source_type'] = @source.type_as_source
-      meta['request_at']  = request_at # To make BuildPost jobs idempotent
-    end
-    post_data
-  end
-
 end

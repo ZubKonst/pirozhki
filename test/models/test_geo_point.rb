@@ -4,7 +4,7 @@ class TestGeoPoint < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    @geo_point = GeoPoint.create! lat: 54.983333, lng: 73.366667
+    @geo_point = Source::GeoPoint.create! lat: 54.983333, lng: 73.366667
   end
 
   def teardown
@@ -12,7 +12,7 @@ class TestGeoPoint < Minitest::Test
   end
 
   def test_type_as_source
-    assert_equal 'GeoPoint', @geo_point.type_as_source
+    assert_equal 'Source::GeoPoint', @geo_point.type_as_source
   end
 
   def test_load_posts

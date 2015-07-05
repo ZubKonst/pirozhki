@@ -3,20 +3,13 @@ require 'set'
 class InstagramRecorder
 
   class << self
-    def not_in_database source, posts_data
+    def not_in_database source_type, source_id, posts_data
       instagram_ids = posts_data.map { |post_data| post_data['id'] }
+      source = Source.find_source source_type, source_id
       exists_instagram_ids = source.posts.pluck_where :instagram_id, instagram_ids
       exists_instagram_ids = exists_instagram_ids.to_set
       posts_data.reject do |post_data|
         exists_instagram_ids.include? post_data['id']
-      end
-    end
-
-    def select_with_location posts_data
-      posts_data.select do |post_data|
-        post_data['location'].present? &&
-          post_data['location']['latitude'] &&
-          post_data['location']['longitude']
       end
     end
 
@@ -67,8 +60,7 @@ class InstagramRecorder
   end
 
   def create_post records_info
-    @data['meta'] ||= {}
-    @data['meta']['records'] = records_info
+    @data['related_records'] = records_info
     PostBuilder.find_or_create! @data
   end
 

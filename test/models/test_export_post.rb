@@ -1,13 +1,13 @@
 require_relative '../test_helper'
-require_relative '../helpers/fake_instagram_response'
+require_relative '../helpers/fake_instagram_loader'
 
 class TestPost < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    source = GeoPoint.create! lat: rand*100, lng: rand*100
-    instagram_response = FakeInstagramResponse.new source.type_as_source, source.id
-    @post_data = instagram_response.sample_with_meta
+    source = Source::GeoPoint.create! lat: rand*100, lng: rand*100
+    instagram_response = FakeInstagramLoader.new source
+    @post_data = instagram_response.get_posts.to_a.sample
     @post = InstagramRecorder.create_from_hash @post_data
   end
 

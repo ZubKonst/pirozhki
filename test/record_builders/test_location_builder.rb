@@ -1,5 +1,5 @@
 require_relative '../test_helper'
-require_relative '../helpers/fake_instagram_response'
+require_relative '../helpers/fake_instagram_loader'
 require_relative 'test_base_builder'
 
 class TestLocationBuilder < Minitest::Test
@@ -8,7 +8,8 @@ class TestLocationBuilder < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    @collection_data = FakeInstagramResponse.new.all_with_named_location.map { |t| t['location'] }
+    posts = FakeInstagramLoader.new.get_posts.select_with_location
+    @collection_data = posts.map { |t| t['location'] }
     @sample_data = @collection_data.sample
   end
 

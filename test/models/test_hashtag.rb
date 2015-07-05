@@ -4,7 +4,7 @@ class TestHashtag < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    @hashtag = Hashtag.create! tag_name: 'Omsk'
+    @hashtag = Source::Hashtag.create! tag_name: 'Omsk'
   end
 
   def teardown
@@ -12,7 +12,7 @@ class TestHashtag < Minitest::Test
   end
 
   def test_type_as_source
-    assert_equal 'Hashtag', @hashtag.type_as_source
+    assert_equal 'Source::Hashtag', @hashtag.type_as_source
   end
 
   def test_load_posts

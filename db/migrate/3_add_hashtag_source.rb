@@ -6,7 +6,8 @@ class AddHashtagSource < ActiveRecord::Migration
   end
 
   def down
-    Post.where(source_type: 'Hashtag').destroy_all
+    from_hashtag = Post.where source_type: 'Source::Hashtag'
+    from_hashtag.destroy_all
     drop_table :hashtags
   end
 end
