@@ -17,6 +17,7 @@ if ENV['COVERAGE'] || ENV['TRAVIS']
     add_group 'Workers', 'app/workers'
 
     add_filter '/config/'
+    add_filter '/test/'
   end
 end
 ###################

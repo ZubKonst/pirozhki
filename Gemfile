@@ -19,6 +19,7 @@ gem 'logstash-logger', require: false
 gem 'awesome_print'
 gem 'oj'
 gem 'rake'
+gem 'adamantium'
 
 # social networks
 gem 'instagram'

@@ -8,7 +8,8 @@ Pirozhki
 Pirozhki is a [sidekiq](http://sidekiq.org)-based utility for collecting data from social networks. 
 
 ##Available types of Pirozhki:
-- Pirozhki with instagram and geotags. (GeoPoint table.)
+- Pirozhki with instagram and geotags. (GeoPoint table)
+- Pirozhki with instagram and hashtags. (Hashtag table)
 
 ##Useful examples:
 - Real life demo: http://pirozhki.zubkonst.com

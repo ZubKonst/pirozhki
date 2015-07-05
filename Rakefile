@@ -1,6 +1,7 @@
 require 'yaml'
 
 require_relative 'config/initializers/env'
+require_relative 'app'
 
 ## Test tasks ##
 require 'rake'
