@@ -17,7 +17,7 @@ class RawPosts
     @created_at = Time.now.to_i
   end
 
-  memoize def select_new_posts
+  def select_new_posts
     new_posts = @posts.dup
     new_posts = InstagramRecorder.not_in_database @source_type, @source_id, new_posts
     RawPosts.new @source_type, @source_id, new_posts
