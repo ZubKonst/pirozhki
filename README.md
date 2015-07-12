@@ -11,11 +11,10 @@ Pirozhki is a [sidekiq](http://sidekiq.org)-based utility for collecting data fr
 - Pirozhki with instagram and geotags. (GeoPoint table)
 - Pirozhki with instagram and hashtags. (Hashtag table)
 
-##Useful examples:
-- Real life demo: http://pirozhki.zubkonst.com
-
 ##Run Pirozhki in Docker container:
-- Visit [Pirozhki-docker](https://github.com/ZubKonst/pirozhki-docker)
+- See `Pirozhki-ELK` project:
+  - source code - https://github.com/ZubKonst/pirozhki-elk
+  - website - http://pirozhki.zubkonst.com
 
 ##Run Pirozhki locally:
 - Copy all files from `APP/config/variables/sample/` to `APP/config/variables/` and fill with your data.
