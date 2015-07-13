@@ -1,5 +1,5 @@
 require_relative '../test_helper'
-require_relative '../helpers/fake_instagram_response'
+require_relative '../helpers/fake_instagram_loader'
 require_relative 'test_base_builder'
 
 class TestTagBuilder < Minitest::Test
@@ -8,7 +8,8 @@ class TestTagBuilder < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    @collection_data = FakeInstagramResponse.new.all_with_tags.flat_map { |t| t['tags'] }
+    posts = FakeInstagramLoader.new.get_posts.select_with_tags
+    @collection_data = posts.flat_map { |t| t['tags'] }
     @sample_data = @collection_data.sample
   end
 

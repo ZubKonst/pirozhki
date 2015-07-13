@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # rails parts
-gem 'activerecord',  '4.2.2', require: 'active_record'
-gem 'activesupport', '4.2.2',
+gem 'activerecord',  '4.2.3', require: 'active_record'
+gem 'activesupport', '4.2.3',
     require: %w[ active_support/core_ext/numeric/time active_support/concern ]
 
 # databases
@@ -19,6 +19,7 @@ gem 'logstash-logger', require: false
 gem 'awesome_print'
 gem 'oj'
 gem 'rake'
+gem 'adamantium'
 
 # social networks
 gem 'instagram'

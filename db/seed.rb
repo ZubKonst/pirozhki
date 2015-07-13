@@ -11,13 +11,23 @@ coordinates =
     {:lat=>43.81, :lng=>-79.55}, {:lat=>43.81, :lng=>-79.38}, {:lat=>43.81, :lng=>-79.20},
     {:lat=>43.86, :lng=>-79.64}, {:lat=>43.86, :lng=>-79.46}, {:lat=>43.86, :lng=>-79.29}, {:lat=>43.86, :lng=>-79.11},
   ]
+hashtags = [
+  tag_name: 'canada',
+  tag_name: 'ontario',
+  tag_name: 'toronto',
+]
 
-p "At start #{GeoPoint.count} geo_points."
+p 'Before seeding:'
+p "#{Source::GeoPoint.count} geo_points,"
+p "#{Source::Hashtag.count} hashtags."
 
 coordinates.each do |coordinate|
-  GeoPoint.find_or_create_by! coordinate
+  Source::GeoPoint.find_or_create_by! coordinate
+end
+hashtags.each do |hashtag|
+  Source::Hashtag.find_or_create_by! hashtag
 end
 
-p "At finish #{GeoPoint.count} geo_points."
-
-
+p 'After seeding:'
+p "#{Source::GeoPoint.count} geo_points,"
+p "#{Source::Hashtag.count} hashtags."

@@ -4,12 +4,7 @@ class PostBuilder < BaseBuilder
   MODEL = Post
 
   def attrs
-    base_attrs =
-      {
-        instagram_id: @data['id'],
-        geo_point_id: @data['meta']['geo_point_id'],
-      }
-
+    base_attrs = uniq_attrs
     base_attrs.merge! records_attrs
     base_attrs.merge! content_attrs
     base_attrs.merge! counter_attrs
@@ -20,12 +15,16 @@ class PostBuilder < BaseBuilder
   private
 
   def uniq_attrs
-    { instagram_id: @data['id'] }
+    {
+      instagram_id: @data['id'],
+      source_id:   @data['source']['id'],
+      source_type: @data['source']['type']
+    }
   end
 
   # Attributes that are dependent on other recordings.
   def records_attrs
-    records_info = @data['meta']['records']
+    records_info = @data['related_records']
     {
       user_id:     records_info['user_id'],
       tag_ids:     records_info['tag_ids'],

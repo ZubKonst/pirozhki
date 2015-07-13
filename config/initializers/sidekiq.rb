@@ -28,7 +28,6 @@ end
 
 Sidekiq.configure_server do |config|
   config.redis = redis_config
-  config.poll_interval = 15
   config.server_middleware do |chain|
     chain.add Sidekiq::Throttler, storage: :redis
   end

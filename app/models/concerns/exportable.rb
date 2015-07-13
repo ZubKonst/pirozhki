@@ -18,9 +18,11 @@ module Exportable
           attrs.merge! extra_attrs
         end
         # add prefix to hash keys
-        attrs.keys.each do |k|
-          new_k = "#{prefix}_#{k}"
-          attrs[new_k] = attrs.delete k
+        if prefix.present?
+          attrs.keys.each do |k|
+            new_k = "#{prefix}_#{k}"
+            attrs[new_k] = attrs.delete k
+          end
         end
         # result
         attrs

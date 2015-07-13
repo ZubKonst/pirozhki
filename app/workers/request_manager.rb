@@ -12,18 +12,9 @@ class RequestManager
   end
 
   def perform
-    geo_points = all_geo_points
-    geo_points.each do |gp|
-      init_load gp.id
+    Source.all_sources.each do |source|
+      LoadFromSource.perform_async source.type_as_source, source.id
     end
-  end
-
-  def all_geo_points
-    GeoPoint.all.shuffle # Slow but works
-  end
-
-  def init_load geo_point_id
-    LoadByGeoPoint.perform_async geo_point_id
   end
 end
 

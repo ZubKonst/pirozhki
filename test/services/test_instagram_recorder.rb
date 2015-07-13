@@ -1,14 +1,17 @@
 require_relative '../test_helper'
-require_relative '../helpers/fake_instagram_response'
+require_relative '../helpers/fake_instagram_loader'
 
 class TestInstagramRecorder < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    geo_point = GeoPoint.create! lat: rand*100, lng: rand*100
-    instagram_response = FakeInstagramResponse.new geo_point.id
-    @collection_data = instagram_response.all_with_meta
-    @sample_data = instagram_response.sample_with_meta
+    @source = Source::GeoPoint.create! lat: rand*100, lng: rand*100
+    instagram_response = FakeInstagramLoader.new @source
+    @collection_data =
+      instagram_response.get_posts.
+        select_with_tags.
+        select_with_location
+    @sample_data = @collection_data.to_a.sample
   end
 
   def teardown
@@ -46,7 +49,7 @@ class TestInstagramRecorder < Minitest::Test
       InstagramRecorder.create_from_hash post_data
     end
 
-    not_created_posts = InstagramRecorder.not_in_database @collection_data
+    not_created_posts = InstagramRecorder.not_in_database @source.type_as_source, @source.id, @collection_data
     not_created_posts_ids = not_created_posts.map { |post_data| post_data['id'] }
     posts_to_skip_ids = posts_to_skip.map { |post_data| post_data['id'] }
     assert_equal posts_to_skip_ids.sort, not_created_posts_ids.sort
