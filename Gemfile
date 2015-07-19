@@ -17,7 +17,7 @@ gem 'logstash-logger', require: false
 
 # support
 gem 'awesome_print'
-gem 'oj'
+gem 'json'
 gem 'rake'
 gem 'adamantium'
 gem 'newrelic_rpm', require: false
