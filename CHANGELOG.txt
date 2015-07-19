@@ -1,3 +1,5 @@
+Pirozhki 0.5.1, 2015-07-18
+--------------------------
 - Update sidekiq (add session_secret)
 - Add NewRelic support
 
