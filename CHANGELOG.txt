@@ -1,3 +1,5 @@
+- Add NewRelic support
+
 Pirozhki 0.5.0, 2015-07-12
 --------------------------
 - Add hashtag as a source for instagram.

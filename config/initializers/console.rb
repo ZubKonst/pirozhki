@@ -1,7 +1,4 @@
-irb_defined = defined? IRB
-not_test_env = APP_ENV != 'test'
-
-if irb_defined && not_test_env
+if $0 == 'irb'
   AwesomePrint.irb!
 
   redis_configs = YAML.load_file "#{APP_ROOT}/config/variables/redis.yml"

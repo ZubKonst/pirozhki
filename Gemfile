@@ -20,6 +20,7 @@ gem 'awesome_print'
 gem 'oj'
 gem 'rake'
 gem 'adamantium'
+gem 'newrelic_rpm', require: false
 
 # social networks
 gem 'instagram'
