@@ -7,13 +7,18 @@ common: &default_settings
   web:
     username: admin
     password:
+    session_secret:
   export:
     type: stdout
+  newrelic:
+    enabled: true
   logging:
     type: stdout
 
 test:
   <<: *default_settings
+  newrelic:
+    enabled: false
 
 development:
   <<: *default_settings
@@ -23,6 +28,7 @@ production:
   web:
     username: admin
     password: REPLACE_ME
+    session_secret: REPLACE_ME
   export:
     type: logstash_tcp
     host: localhost

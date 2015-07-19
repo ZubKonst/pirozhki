@@ -7,4 +7,5 @@ require_relative 'initializers/database'
 require_relative 'initializers/sidekiq'
 require_relative 'initializers/instagram'
 
+require_relative 'initializers/newrelic'
 require_relative 'initializers/console'

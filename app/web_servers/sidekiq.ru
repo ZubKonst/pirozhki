@@ -5,6 +5,8 @@ require 'sidekiq/web'
 require 'sidetiq/web'
 
 map '/' do
+  use Rack::Session::Cookie, secret: Settings.web.session_secret
+
   if Settings.web.username && Settings.web.password
     use Rack::Auth::Basic, 'Protected Area' do |username, password|
       username == Settings.web.username.to_s &&

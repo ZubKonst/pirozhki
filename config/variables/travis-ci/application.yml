@@ -6,5 +6,7 @@ test:
     client_secret: REPLACE_ME
   export:
     type: stdout
+  newrelic:
+    enabled: false
   logging:
     type: stdout
