@@ -23,7 +23,7 @@ class RawPosts
     RawPosts.new @source_type, @source_id, new_posts
   end
 
-  memoize def select_with_location
+  def select_with_location
     new_posts = @posts.dup
     new_posts = new_posts.select do |post|
       post['location'].present? &&
@@ -33,7 +33,7 @@ class RawPosts
     RawPosts.new @source_type, @source_id, new_posts
   end
 
-  memoize def select_with_tags
+  def select_with_tags
     new_posts = @posts.dup
     new_posts = new_posts.select do |post|
       post['tags'].any?
@@ -43,7 +43,7 @@ class RawPosts
 
   private
 
-  memoize def source_info
+  def source_info
     {
       'id'   => @source_id,
       'type' => @source_type,
