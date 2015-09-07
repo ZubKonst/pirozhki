@@ -5,7 +5,7 @@ class LocationBuilder < BaseBuilder
 
   def attrs
     {
-      instagram_id: @data['id'],
+      instagram_id: @data['id'].to_s.presence,
       lat: @data['latitude'],
       lng: @data['longitude'],
       name: @data['name']
