@@ -35,6 +35,7 @@ gem 'sinatra'
 gem 'sidekiq-throttler'
 gem 'sidekiq-unique-jobs'
 gem 'sidetiq'
+gem 'sidekiq-statistic'
 
 # gem 'airbrake'
 # gem 'newrelic'

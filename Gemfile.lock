@@ -125,6 +125,8 @@ GEM
       json (~> 1.0)
       redis (~> 3.2, >= 3.2.1)
       redis-namespace (~> 1.5, >= 1.5.2)
+    sidekiq-statistic (1.1.0)
+      sidekiq (~> 3.3, >= 3.3.4)
     sidekiq-throttler (0.4.1)
       activesupport
       sidekiq (>= 2.5, < 4.0)
@@ -184,6 +186,7 @@ DEPENDENCIES
   redis-namespace
   settingslogic
   sidekiq
+  sidekiq-statistic
   sidekiq-throttler
   sidekiq-unique-jobs
   sidetiq
