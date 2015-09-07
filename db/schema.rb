@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3) do
+ActiveRecord::Schema.define(version: 4) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,10 +34,10 @@ ActiveRecord::Schema.define(version: 3) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.float   "lat",          null: false
-    t.float   "lng",          null: false
-    t.integer "instagram_id"
-    t.text    "name"
+    t.float "lat",          null: false
+    t.float "lng",          null: false
+    t.text  "instagram_id"
+    t.text  "name"
   end
 
   add_index "locations", ["instagram_id"], name: "index_locations_on_instagram_id", unique: true, where: "(instagram_id IS NOT NULL)", using: :btree
@@ -77,10 +77,10 @@ ActiveRecord::Schema.define(version: 3) do
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.integer "instagram_id", null: false
-    t.text    "nick_name",    null: false
-    t.text    "full_name",    null: false
-    t.text    "image",        null: false
+    t.text "instagram_id", null: false
+    t.text "nick_name",    null: false
+    t.text "full_name",    null: false
+    t.text "image",        null: false
   end
 
   add_index "users", ["instagram_id"], name: "index_users_on_instagram_id", unique: true, using: :btree

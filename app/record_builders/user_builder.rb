@@ -5,7 +5,7 @@ class UserBuilder < BaseBuilder
 
   def attrs
     {
-      instagram_id: @data['id'].to_i,
+      instagram_id: @data['id'],
       nick_name:    @data['username'],
       full_name:    @data['full_name'],
       image:        @data['profile_picture']
