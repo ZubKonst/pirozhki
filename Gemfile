@@ -21,6 +21,7 @@ gem 'json'
 gem 'rake'
 gem 'adamantium'
 gem 'newrelic_rpm', require: false
+gem 'rollbar', require: false
 
 # social networks
 gem 'instagram'
@@ -36,9 +37,6 @@ gem 'sidekiq-throttler'
 gem 'sidekiq-unique-jobs'
 gem 'sidetiq'
 gem 'sidekiq-statistic'
-
-# gem 'airbrake'
-# gem 'newrelic'
 
 group :development do
   gem 'foreman'

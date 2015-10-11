@@ -8,5 +8,7 @@ test:
     type: stdout
   newrelic:
     enabled: false
+  rollbar:
+    enabled: false
   logging:
     type: stdout

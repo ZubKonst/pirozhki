@@ -117,6 +117,8 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rollbar (2.4.0)
+      multi_json
     settingslogic (2.0.9)
     sidekiq (3.4.2)
       celluloid (~> 0.16.0)
@@ -183,6 +185,7 @@ DEPENDENCIES
   rake
   redis
   redis-namespace
+  rollbar
   settingslogic
   sidekiq (= 3.4.2)
   sidekiq-statistic

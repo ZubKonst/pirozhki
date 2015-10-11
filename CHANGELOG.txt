@@ -1,10 +1,11 @@
-- Add sidekiq-statistic
-- Remove Oj parser
+- Add rollbar support.
+- Add sidekiq-statistic.
+- Remove Oj parser.
 
 Pirozhki 0.5.1, 2015-07-18
 --------------------------
-- Update sidekiq (add session_secret)
-- Add NewRelic support
+- Update sidekiq (add session_secret).
+- Add NewRelic support.
 
 Pirozhki 0.5.0, 2015-07-12
 --------------------------

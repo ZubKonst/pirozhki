@@ -12,12 +12,17 @@ common: &default_settings
     type: stdout
   newrelic:
     enabled: true
+  rollbar:
+    enabled: true
+    access_token: REPLACE_ME
   logging:
     type: stdout
 
 test:
   <<: *default_settings
   newrelic:
+    enabled: false
+  rollbar:
     enabled: false
 
 development:
