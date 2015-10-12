@@ -1,8 +1,5 @@
 require 'yaml'
 
-require_relative 'config/initializers/env'
-require_relative 'app'
-
 ## Test tasks ##
 require 'rake'
 require 'rake/testtask'
@@ -12,6 +9,7 @@ end
 task :default => :test
 ##############
 
+require_relative 'config/initializers/env'
 
 ## DB tasks ##
 require_relative 'lib/seeder'
