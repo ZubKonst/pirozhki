@@ -1,4 +1,5 @@
 require_relative 'initializers/env'
+require_relative 'initializers/oj'
 require_relative 'initializers/i18n'
 
 require_relative 'initializers/exporter'

@@ -1,6 +1,5 @@
 - Add rollbar support.
 - Add sidekiq-statistic.
-- Remove Oj parser.
 
 Pirozhki 0.5.1, 2015-07-18
 --------------------------
