@@ -11,6 +11,10 @@ task :default => :test
 
 require_relative 'config/initializers/env'
 
+task :environment do
+  require_relative 'app'
+end
+
 ## DB tasks ##
 require_relative 'lib/seeder'
 require 'active_record_migrations'
