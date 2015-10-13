@@ -1,1 +1,2 @@
-Oj.default_options[:mode] = :strict
+Oj.default_options[:mode] = :compat
+Oj.mimic_JSON()

@@ -1,4 +1,5 @@
-ENV['APP_ENV'] ||= 'test'
+APP_ENV = ENV['APP_ENV'] || 'test'
+ENV['APP_ENV'] = APP_ENV
 
 ## TestCoverage ##
 if ENV['COVERAGE'] || ENV['TRAVIS']
@@ -22,12 +23,11 @@ if ENV['COVERAGE'] || ENV['TRAVIS']
 end
 ###################
 
-
 ## Requires ##
 require 'minitest/autorun'
+require_relative '../config/initializers/env'
 require_relative '../app'
 ###################
-
 
 ## AwesomePrint ##
 module Minitest::Assertions
@@ -36,5 +36,3 @@ module Minitest::Assertions
   end
 end
 ###################
-
-

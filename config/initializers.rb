@@ -8,4 +8,5 @@ require_relative 'initializers/sidekiq'
 require_relative 'initializers/instagram'
 
 require_relative 'initializers/newrelic'
+require_relative 'initializers/rollbar'
 require_relative 'initializers/console'

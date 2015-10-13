@@ -8,7 +8,8 @@ class TestLocationBuilder < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    posts = FakeInstagramLoader.new.get_posts.select_with_location
+    posts = FakeInstagramLoader.new.get_posts
+    posts.select_with_location!
     @collection_data = posts.map { |t| t['location'] }
     @sample_data = @collection_data.sample
   end

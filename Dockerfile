@@ -1,4 +1,4 @@
-FROM ruby:2.2.1
+FROM ruby:2.2.3
 MAINTAINER Konstantin Zub "hello@zubkonst.com"
 
 RUN mkdir /pirozhki

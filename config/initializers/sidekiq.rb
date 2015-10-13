@@ -3,14 +3,10 @@ require 'yaml'
 module Sidekiq
   def self.load_json string
     Oj.load string
-  rescue
-    JSON.parse string
   end
 
   def self.dump_json object
-    Oj.dump object, mode: :compat
-  rescue
-    JSON.generate object
+    Oj.dump object
   end
 end
 

@@ -16,36 +16,35 @@ class TestRawPosts < Minitest::Test
     end
   end
 
-  def test_select_with_tags
+  def test_select_with_tags!
     instagram_response = [
       {'id' => 1, 'tags' => %w[ Omsk Tomsk ]},
       {'id' => 2, 'tags' => %w[]},
       {'id' => 3, 'tags' => %w[ Toronto London ]},
     ]
     raw_posts = RawPosts.new @source_type, @source_id, instagram_response
-    raw_posts = raw_posts.select_with_tags
+    raw_posts = raw_posts.select_with_tags!
     assert_equal [1, 3], raw_posts.map { |t| t['id'] }.sort
   end
 
-  def test_select_with_location
+  def test_select_with_location!
     instagram_response = [
       {'id' => 1, 'location' => nil},
       {'id' => 2, 'location' => {'id' => 2}},
       {'id' => 3, 'location' => {'id' => 3, 'latitude' => 55.5, 'longitude' => 33.3}},
     ]
     raw_posts = RawPosts.new @source_type, @source_id, instagram_response
-    raw_posts = raw_posts.select_with_location
+    raw_posts.select_with_location!
     assert_equal [3], raw_posts.map { |t| t['id'] }
   end  
   
-  def test_select_new_posts
+  def test_select_new_posts!
     instagram_response = [{'id' => 1}, {'id' => 2}, {'id' => 3}]
     new_posts = [{'id' => 2}]
     raw_posts = RawPosts.new @source_type, @source_id, instagram_response
-    raw_posts =
-      InstagramRecorder.stub :not_in_database, new_posts do
-        raw_posts.select_new_posts
-      end
+    InstagramRecorder.stub :not_in_database, new_posts do
+      raw_posts.select_new_posts!
+    end
     assert_equal [2], raw_posts.map { |t| t['id'] }
   end
 end

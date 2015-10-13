@@ -2,7 +2,6 @@
 
 # Pirozhki Project
 config/variables/*.yml
-config/variables/my_variables/*
 /bin/
 /log/*
 /pids/*

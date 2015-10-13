@@ -1,7 +1,12 @@
+Pirozhki 0.5.2, 2015-10-12
+--------------------------
+- Add rollbar support.
+- Add sidekiq-statistic.
+
 Pirozhki 0.5.1, 2015-07-18
 --------------------------
-- Update sidekiq (add session_secret)
-- Add NewRelic support
+- Update sidekiq (add session_secret).
+- Add NewRelic support.
 
 Pirozhki 0.5.0, 2015-07-12
 --------------------------

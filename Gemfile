@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # rails parts
-gem 'activerecord',  '4.2.3', require: 'active_record'
-gem 'activesupport', '4.2.3',
+gem 'activerecord',  '4.2.4', require: 'active_record'
+gem 'activesupport', '4.2.4',
     require: %w[ active_support/core_ext/numeric/time active_support/concern ]
 
 # databases
@@ -19,8 +19,8 @@ gem 'logstash-logger', require: false
 gem 'awesome_print'
 gem 'oj'
 gem 'rake'
-gem 'adamantium'
 gem 'newrelic_rpm', require: false
+gem 'rollbar', require: false
 
 # social networks
 gem 'instagram'
@@ -30,14 +30,12 @@ gem 'puma'
 
 # workflow
 gem 'settingslogic'
-gem 'sidekiq'
+gem 'sidekiq', '3.4.2' # https://github.com/tobiassvn/sidetiq/issues/140
 gem 'sinatra'
 gem 'sidekiq-throttler'
 gem 'sidekiq-unique-jobs'
 gem 'sidetiq'
-
-# gem 'airbrake'
-# gem 'newrelic'
+gem 'sidekiq-statistic'
 
 group :development do
   gem 'foreman'

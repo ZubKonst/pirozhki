@@ -2,8 +2,8 @@ sudo: false
 language: ruby
 cache: bundler
 rvm:
-  - 2.1.5
-  - 2.2.1
+  - 2.1.7
+  - 2.2.3
 services:
   - redis-server
 before_script:
