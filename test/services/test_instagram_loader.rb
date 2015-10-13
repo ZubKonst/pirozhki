@@ -14,8 +14,8 @@ class TestInstagramLoader < Minitest::Test
 
   def test_filter_results
     raw_posts = Minitest::Mock.new
-    raw_posts.expect :select_with_location, raw_posts
-    raw_posts.expect :select_new_posts, raw_posts
+    raw_posts.expect :select_with_location!, raw_posts
+    raw_posts.expect :select_new_posts!, raw_posts
     @source.stub :load_posts, raw_posts do
       @instagram_loader.get_posts only_not_persisted: true, only_with_location: true
     end

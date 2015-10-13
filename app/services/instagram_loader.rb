@@ -6,8 +6,8 @@ class InstagramLoader
 
   def get_posts only_not_persisted: true, only_with_location: false
     raw_posts = @source.load_posts request_params
-    raw_posts = raw_posts.select_with_location if only_with_location
-    raw_posts = raw_posts.select_new_posts     if only_not_persisted
+    raw_posts.select_with_location! if only_with_location
+    raw_posts.select_new_posts!     if only_not_persisted
     raw_posts
   end
 

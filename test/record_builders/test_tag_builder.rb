@@ -8,7 +8,8 @@ class TestTagBuilder < Minitest::Test
 
   def setup
     DatabaseCleaner.start
-    posts = FakeInstagramLoader.new.get_posts.select_with_tags
+    posts = FakeInstagramLoader.new.get_posts
+    posts.select_with_tags!
     @collection_data = posts.flat_map { |t| t['tags'] }
     @sample_data = @collection_data.sample
   end

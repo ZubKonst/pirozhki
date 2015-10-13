@@ -7,10 +7,9 @@ class TestInstagramRecorder < Minitest::Test
     DatabaseCleaner.start
     @source = Source::GeoPoint.create! lat: rand*100, lng: rand*100
     instagram_response = FakeInstagramLoader.new @source
-    @collection_data =
-      instagram_response.get_posts.
-        select_with_tags.
-        select_with_location
+    @collection_data = instagram_response.get_posts
+    @collection_data.select_with_tags!
+    @collection_data.select_with_location!
     @sample_data = @collection_data.to_a.sample
   end
 
