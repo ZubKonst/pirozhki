@@ -1,3 +1,5 @@
+Pirozhki 0.5.2, 2015-10-12
+--------------------------
 - Add rollbar support.
 - Add sidekiq-statistic.
 
