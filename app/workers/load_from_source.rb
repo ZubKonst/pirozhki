@@ -1,9 +1,10 @@
 class LoadFromSource
   include Sidekiq::Worker
 
-  # The job will be unique for the number of seconds configured [default 30 minutes] or until the job has been completed.
   sidekiq_options queue: :load_from_source,
-                  unique: true,
+                  # This means that a job can only be scheduled into redis once per whatever the configuration of unique arguments.
+                  # Any jobs added until the first one of the same arguments has been unlocked will just be dropped.
+                  unique: :until_executing,
                   throttle: { threshold: 80, period: 1.minute.to_i, key: 'instagram_api_request' }
 
 
