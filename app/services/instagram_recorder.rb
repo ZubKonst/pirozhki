@@ -50,13 +50,13 @@ class InstagramRecorder
   def create_tags
     @data['tags'].map do |tag|
       TagBuilder.find_or_create! tag
-    end
+    end.uniq
   end
 
   def create_users_in_photo
     @data['users_in_photo'].map do |user_in_photo|
       UserBuilder.find_or_create! user_in_photo['user']
-    end
+    end.uniq
   end
 
   def create_post records_info
