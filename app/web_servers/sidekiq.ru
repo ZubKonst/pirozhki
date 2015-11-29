@@ -5,7 +5,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 map '/' do
-  use Rack::Session::Cookie, secret: Settings.web.session_secret
+  use Rack::Session::Cookie, key: 'pirozhki.session', secret: Settings.web.session_secret
 
   if Settings.web.username && Settings.web.password
     use Rack::Auth::Basic, 'Protected Area' do |username, password|
