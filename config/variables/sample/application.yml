@@ -10,20 +10,15 @@ common: &default_settings
     session_secret:
   export:
     type: stdout
-  newrelic:
-    enabled: true
-  rollbar:
-    enabled: true
-    access_token: REPLACE_ME
   logging:
     type: stdout
+  newrelic:
+    enabled: false
+  rollbar:
+    enabled: false
 
 test:
   <<: *default_settings
-  newrelic:
-    enabled: false
-  rollbar:
-    enabled: false
 
 development:
   <<: *default_settings
@@ -40,3 +35,8 @@ production:
     port: 5229
   logging:
     type: file
+  newrelic:
+    enabled: true
+  rollbar:
+    enabled: true
+    access_token: REPLACE_ME
