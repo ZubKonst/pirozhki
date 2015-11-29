@@ -2,7 +2,7 @@ ENV['REDIS_NAMESPACE_QUIET'] = '1'
 require_relative '../../app'
 
 require 'sidekiq/web'
-require 'sidetiq/web'
+require 'sidekiq/cron/web'
 
 map '/' do
   use Rack::Session::Cookie, secret: Settings.web.session_secret
