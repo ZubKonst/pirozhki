@@ -1,3 +1,6 @@
+Pirozhki 0.5.3, 2015-11-29
+--------------------------
+- Fix CSRF protection + sessions cookies
 - Config uniqueness of BuildPost and LoadFromSource
 - Migrate from sidetiq to sidekiq-cron
 
