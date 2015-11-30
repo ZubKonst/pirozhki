@@ -2,11 +2,9 @@ ENV['REDIS_NAMESPACE_QUIET'] = '1'
 require_relative '../../app'
 
 require 'sidekiq/web'
-require 'sidetiq/web'
+require 'sidekiq/cron/web'
 
-map '/' do
-  use Rack::Session::Cookie, secret: Settings.web.session_secret
-
+map '/sidekiq' do
   if Settings.web.username && Settings.web.password
     use Rack::Auth::Basic, 'Protected Area' do |username, password|
       username == Settings.web.username.to_s &&
@@ -14,5 +12,12 @@ map '/' do
     end
   end
 
-  run Sidekiq::Web
+  # https://github.com/mperham/sidekiq/issues/2555
+  class SidekiqWeb < ::Sidekiq::Web
+    set :session_secret, Settings.web.session_secret
+    set :sessions, key: '_pirozhki'
+    set :logging, Logger::DEBUG
+  end
+
+  run SidekiqWeb
 end
